@@ -175,10 +175,6 @@ main {
   border-bottom: 2px solid var(--gray-200);
 }
 
-.card-header {
-  margin-bottom: 6px;
-}
-
 .card-type {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 1.1rem;
@@ -186,32 +182,47 @@ main {
   color: var(--gray-900);
   letter-spacing: 0.04em;
   line-height: 1.2;
+  margin-bottom: 8px;
 }
 
-.card-badge {
+.card-tag {
   display: inline-block;
   background: linear-gradient(135deg, var(--pink), #c9395f);
   color: white;
-  font-size: 0.65rem;
+  font-size: 0.63rem;
   font-weight: 700;
   padding: 2px 10px;
   border-radius: 12px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   margin-bottom: 10px;
 }
 
 .card-player {
-  font-size: 1.05rem;
+  font-size: 1.0rem;
   font-weight: 700;
   color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.card-player .label {
+  font-size: 0.68rem;
+  color: var(--gray-500);
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.card-player2 {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gray-700);
   margin-bottom: 10px;
 }
 
-.card-player span {
-  font-size: 0.7rem;
+.card-player2 .label {
+  font-size: 0.65rem;
   color: var(--gray-500);
   font-weight: 400;
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
 .card-teams {
@@ -555,7 +566,7 @@ footer {
         <div class="item-icon-wrap">🌸</div>
         <div class="item-body">
           <div class="item-title">先発選手投稿マニュアル</div>
-          <div class="item-desc">試合日に先発選手をファンクラブサイト（sheeta）・X・Instagramへ投稿する手順書。曜日・PV有無・ABEMAリンクの状況別に作業フローが切り替わり、投稿文テンプレートや画像設定も確認できます。</div>
+          <div class="item-desc">試合日に先発選手をファンクラブサイト（sheeta）・Xへ投稿する手順書。曜日・PV有無・ABEMAリンクの状況別に作業フローが切り替わり、投稿文テンプレートや画像設定も確認できます。</div>
         </div>
         <span class="item-arrow">›</span>
       </a>
@@ -563,7 +574,7 @@ footer {
         <div class="item-icon-wrap">🐦</div>
         <div class="item-body">
           <div class="item-title">SNS投稿マニュアル</div>
-          <div class="item-desc">X（旧Twitter）コミュニティ「桜騎士団」の入団申請チェック方法と、ファンから届くイラストをInstagramへ転載する際の承諾確認フローを解説した、SNS業務の基礎マニュアルです。</div>
+          <div class="item-desc">X（旧Twitter）コミュニティ「桜騎士団」の入団申請チェック方法と、#桜援イラスト の検索・リポストなどの確認フローを解説した、SNS業務の基礎マニュアルです。</div>
         </div>
         <span class="item-arrow">›</span>
       </a>
@@ -723,8 +734,7 @@ async function loadSchedule() {
       return;
     }
 
-    // 1行目はヘッダーとして無視し、データ行を処理
-    // 列順: 日付, 内容, 先発選手, 対戦チームA, 対戦チームB, 対戦チームC, コメント
+    // 列順: 日付, 内容, タグ, 1試合目, 2試合目, 対戦チームA, 対戦チームB, 対戦チームC, 対戦チームD, コメント
     const dataRows = rows.slice(1).filter(r => r.some(c => c.trim()));
 
     if (dataRows.length === 0) {
@@ -734,9 +744,9 @@ async function loadSchedule() {
 
     container.innerHTML = '';
     dataRows.forEach(row => {
-      const [date, type, player, teamA, teamB, teamC, comment] = row.map(c => c.trim());
+      const [date, type, tag, player1, player2, teamA, teamB, teamC, teamD, comment] = row.map(c => c.trim());
 
-      const teams = [teamA, teamB, teamC].filter(Boolean);
+      const teams = [teamA, teamB, teamC, teamD].filter(Boolean);
       const teamsHTML = teams.map(t => {
         const c = getTeamColor(t);
         return c
@@ -744,17 +754,16 @@ async function loadSchedule() {
           : `<span class="team-tag">${t}</span>`;
       }).join('');
 
-      const commentHTML = comment ? `<div class="card-comment">💬 ${comment}</div>` : '';
+      const commentHTML = comment ? `<div class="card-comment">${comment}</div>` : '';
 
       const card = document.createElement('div');
       card.className = 'schedule-card';
       card.innerHTML = `
         ${date ? `<div class="card-date">${date}</div>` : ''}
-        <div class="card-header">
-          <div class="card-type">${type || '―'}</div>
-        </div>
-        ${type ? `<span class="card-badge">${type}</span>` : ''}
-        ${player ? `<div class="card-player"><span>先発</span>${player}</div>` : ''}
+        <div class="card-type">${type || '―'}</div>
+        ${tag ? `<span class="card-tag">${tag}</span>` : ''}
+        ${player1 ? `<div class="card-player"><span class="label">先発</span>${player1}</div>` : ''}
+        ${player2 ? `<div class="card-player2"><span class="label">2戦目</span>${player2}</div>` : ''}
         ${teams.length > 0 ? `<div class="card-teams">${teamsHTML}</div>` : ''}
         ${commentHTML}
       `;
