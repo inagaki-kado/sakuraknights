@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KADOKAWAサクラナイツ【インターン用ポータルページ】</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #003087;
+  --blue-mid: #0050b3;
+  --blue-light: #1a6fd4;
+  --blue-pale: #e8f0fc;
+  --pink: #e85d8a;
+  --pink-light: #ff8fab;
+  --pink-pale: #fff0f5;
+  --sakura: #ffb3c6;
+  --white: #ffffff;
+  --gray-50: #f8f9fc;
+  --gray-100: #f0f2f8;
+  --gray-200: #dde2ef;
+  --gray-500: #6b7494;
+  --gray-700: #374064;
+  --gray-900: #0f1428;
+  --gold: #c9a227;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  min-height: 100vh;
+}
+
+/* ========== HEADER ========== */
+header {
+  background: linear-gradient(135deg, var(--blue) 0%, #001a5c 55%, #0a0a2e 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0,48,135,0.5);
+}
+
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.header-logo svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(255,143,171,0.8));
+}
+
+.header-text h1 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.header-text p {
+  font-size: 0.62rem;
+  color: var(--sakura);
+  letter-spacing: 0.15em;
+  margin-top: 2px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+}
+
+.header-badge {
+  margin-left: auto;
+  background: linear-gradient(135deg, var(--pink), #c9395f);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* ========== MAIN LAYOUT ========== */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+/* ========== SECTION TITLES ========== */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-title h2 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+}
+
+.section-title .line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-mid), transparent);
+  border-radius: 2px;
+}
+
+.section-title .icon {
+  font-size: 1.1rem;
+}
+
+/* ========== SCHEDULE SECTION ========== */
+.schedule-section {
+  margin-bottom: 28px;
+}
+
+#schedule-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.schedule-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px 20px;
+  border: 1.5px solid var(--gray-200);
+  box-shadow: 0 2px 12px rgba(0,48,135,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--pink));
+}
+
+.schedule-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,48,135,0.12);
+}
+
+.card-date {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.card-header {
+  margin-bottom: 6px;
+}
+
+.card-type {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--gray-900);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.card-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--pink), #c9395f);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.card-player {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+
+.card-player span {
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  font-weight: 400;
+  margin-right: 6px;
+}
+
+.card-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.team-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1.5px solid;
+}
+
+.card-comment {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  background: var(--gray-50);
+  border-radius: 8px;
+  padding: 6px 10px;
+  border-left: 3px solid var(--pink-light);
+  line-height: 1.5;
+}
+
+/* ========== LOADING / ERROR ========== */
+.loading-msg, .error-msg {
+  text-align: center;
+  padding: 24px;
+  color: var(--gray-500);
+  font-size: 0.85rem;
+}
+
+/* ========== SHIFT BUTTON ========== */
+.shift-btn-wrap {
+  margin-bottom: 16px;
+}
+
+.shift-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 20px rgba(0,48,135,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shift-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,48,135,0.45);
+}
+
+.shift-btn .icon {
+  font-size: 1.3rem;
+}
+
+/* ========== SURVEY BUTTON ========== */
+.survey-btn-wrap {
+  margin-bottom: 36px;
+}
+
+.survey-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: var(--blue);
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 2px solid var(--blue-mid);
+  box-shadow: 0 2px 10px rgba(0,48,135,0.08);
+  transition: all 0.2s;
+}
+
+.survey-btn:hover {
+  background: var(--blue-pale);
+  transform: translateY(-1px);
+}
+
+/* ========== MANUAL CATEGORY ========== */
+.manual-category {
+  margin-bottom: 32px;
+}
+
+.category-header {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+  color: white;
+  border-radius: 10px 10px 0 0;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-header .cat-icon { font-size: 1.2rem; }
+
+.category-header h3 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.category-header .cat-sub {
+  font-size: 0.65rem;
+  opacity: 0.75;
+  margin-left: auto;
+  letter-spacing: 0.1em;
+}
+
+.manual-list {
+  background: white;
+  border: 1.5px solid var(--gray-200);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+.manual-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--gray-100);
+  position: relative;
+}
+
+.manual-item:last-child {
+  border-bottom: none;
+}
+
+.manual-item:hover {
+  background: var(--blue-pale);
+}
+
+.manual-item:hover .item-arrow {
+  transform: translateX(4px);
+}
+
+.item-icon-wrap {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--pink-pale), #ffd6e5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(232,93,138,0.2);
+}
+
+.item-body {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.item-desc {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+.item-arrow {
+  color: var(--gray-500);
+  font-size: 0.9rem;
+  margin-top: 2px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+/* ========== SECONDARY MANUAL ========== */
+.secondary-manual-wrap {
+  margin-bottom: 16px;
+}
+
+.secondary-label {
+  font-size: 0.68rem;
+  color: var(--gray-500);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+.secondary-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  background: white;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.secondary-item:hover {
+  background: var(--blue-pale);
+}
+
+.secondary-item .item-icon-wrap {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+
+/* ========== SAKURA PETALS ========== */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
+}
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--gray-200);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <div class="header-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <!-- 桜の花びら5枚 -->
+          <ellipse cx="50" cy="22" rx="10" ry="20" fill="#ff8fab" transform="rotate(0 50 50)"/>
+          <ellipse cx="50" cy="22" rx="10" ry="20" fill="#ffb3c6" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="22" rx="10" ry="20" fill="#ff8fab" transform="rotate(144 50 50)"/>
+          <ellipse cx="50" cy="22" rx="10" ry="20" fill="#ffb3c6" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="22" rx="10" ry="20" fill="#ff8fab" transform="rotate(288 50 50)"/>
+          <circle cx="50" cy="50" r="10" fill="#ffffff"/>
+          <circle cx="50" cy="50" r="5" fill="#e85d8a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>KADOKAWAサクラナイツ</h1>
+      <p>INTERN PORTAL — SAKURA KNIGHTS</p>
+    </div>
+    <div class="header-badge">INTERN STAFF</div>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <!-- ===== SCHEDULE ===== -->
+  <div class="schedule-section">
+    <div class="section-title">
+      <span class="icon">📅</span>
+      <h2>サクラナイツ スケジュール</h2>
+      <div class="line"></div>
+    </div>
+    <div id="schedule-container">
+      <div class="loading-msg">📡 スケジュールを読み込み中...</div>
+    </div>
+  </div>
+
+  <!-- ===== SHIFT BUTTON ===== -->
+  <div class="shift-btn-wrap">
+    <a href="https://docs.google.com/spreadsheets/d/1Gv_5mqVb9gqkh5zyjXax-p7PifLstE1O_UtOV6K5EI4/edit?usp=sharing"
+       target="_blank" class="shift-btn">
+      <span class="icon">📋</span>
+      インターンシフト表を開く
+      <span style="font-size:0.75rem; opacity:0.8; margin-left:auto;">Google スプレッドシート ↗</span>
+    </a>
+  </div>
+
+  <!-- ===== SURVEY BUTTON ===== -->
+  <div class="survey-btn-wrap">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdsuGEHHYr31AzVtGSmvsyTwmmFYAj41u3r5LyQJF7FVY9-jA/viewform?usp=header"
+       target="_blank" class="survey-btn">
+      <span>📝</span>
+      知識／ツール習熟度アンケート
+      <span style="font-size:0.75rem; opacity:0.7; margin-left:auto;">Google Forms ↗</span>
+    </a>
+  </div>
+
+  <!-- ===== MANUALS ===== -->
+  <div class="section-title">
+    <span class="icon">📚</span>
+    <h2>業務マニュアル</h2>
+    <div class="line"></div>
+  </div>
+
+  <!-- 五番町オフィス -->
+  <div class="manual-category">
+    <div class="category-header">
+      <span class="cat-icon">🏢</span>
+      <h3>五番町オフィス</h3>
+      <span class="cat-sub">GOBANCHO OFFICE</span>
+    </div>
+    <div class="manual-list">
+      <a href="senbatsu_posting_manual.html" class="manual-item">
+        <div class="item-icon-wrap">🌸</div>
+        <div class="item-body">
+          <div class="item-title">先発選手投稿マニュアル</div>
+          <div class="item-desc">試合日に先発選手をファンクラブサイト（sheeta）・X・Instagramへ投稿する手順書。曜日・PV有無・ABEMAリンクの状況別に作業フローが切り替わり、投稿文テンプレートや画像設定も確認できます。</div>
+        </div>
+        <span class="item-arrow">›</span>
+      </a>
+      <a href="sns_intern_manual.html" class="manual-item">
+        <div class="item-icon-wrap">🐦</div>
+        <div class="item-body">
+          <div class="item-title">SNS投稿マニュアル</div>
+          <div class="item-desc">X（旧Twitter）コミュニティ「桜騎士団」の入団申請チェック方法と、ファンから届くイラストをInstagramへ転載する際の承諾確認フローを解説した、SNS業務の基礎マニュアルです。</div>
+        </div>
+        <span class="item-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mリーグスタジオ -->
+  <div class="manual-category">
+    <div class="category-header">
+      <span class="cat-icon">🀄</span>
+      <h3>Mリーグスタジオ</h3>
+      <span class="cat-sub">M.LEAGUE STUDIO</span>
+    </div>
+    <div class="manual-list">
+      <a href="sakuraknights_matchday.html" class="manual-item">
+        <div class="item-icon-wrap">⚔️</div>
+        <div class="item-body">
+          <div class="item-title">試合日業務フロー</div>
+          <div class="item-desc">試合日にスタジオで行う業務を時系列で整理したチェックリスト形式のガイド。試合前準備・一戦目・試合間・二戦目・全試合後の各フェーズで、インターン担当タスクと撮影動画の種類を確認できます。</div>
+        </div>
+        <span class="item-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- インターンスタッフマニュアル（前提知識） -->
+  <div class="secondary-manual-wrap">
+    <p class="secondary-label">▼ 前提知識として参照してください</p>
+    <a href="intern_manual.html" class="secondary-item">
+      <div class="item-icon-wrap" style="font-size:1.1rem;">📋</div>
+      <div class="item-body">
+        <div class="item-title" style="color:var(--gray-700);">インターンスタッフマニュアル</div>
+        <div class="item-desc">インターン全員が最初に読むべき基本ルール集。連絡手段・緊急連絡先・SNS公開禁止・選手との接し方などを網羅し、KADOKAWA社員としての心得とコンプライアンスポリシーを解説します。</div>
+      </div>
+      <span class="item-arrow" style="color:var(--gray-500);">›</span>
+    </a>
+  </div>
+
+</main>
+
+
+<!-- ===== FEEDBACK ===== -->
+<div style="
+  max-width: 860px;
+  margin: 0 auto 0;
+  padding: 24px 20px 32px;
+">
+  <div style="
+    background: linear-gradient(135deg, #fff0f5 0%, #e8f0fc 100%);
+    border: 1.5px solid #ffd6e5;
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  ">
+    <div style="font-size: 1.8rem; flex-shrink: 0;">💬</div>
+    <div style="flex: 1; min-width: 200px;">
+      <div style="
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #003087;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+      ">マニュアルへのフィードバックをお待ちしています</div>
+      <div style="
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 0.72rem;
+        color: #6b7494;
+        line-height: 1.7;
+      ">「手順が分かりにくかった」「内容が実情と違う」など、気づいたことは何でもSlackへ。<br>あなたのフィードバックがマニュアルの改善につながります！</div>
+    </div>
+    <a href="https://app.slack.com/client/ETEM9BTCP/C04S68H50JW" target="_blank" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #003087;
+      color: white;
+      text-decoration: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      box-shadow: 0 3px 12px rgba(0,48,135,0.25);
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2zm1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5zm2-6a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9zm0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5zm6 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2zm-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V7a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5zm-2 6a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2zm0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5z"/></svg>
+      #m室_92_インターン_業務連絡 へ報告
+    </a>
+  </div>
+</div>
+
+<footer>
+  © KADOKAWA SAKURA KNIGHTS — INTERN PORTAL
+</footer>
+
+<!-- ===== SAKURA PETALS ===== -->
+<div id="petals"></div>
+
+<script>
+// ===== チームカラー定義 =====
+const teamColors = {
+  // EXドリブンズ → オレンジ
+  'EX': { bg: '#fff4e6', border: '#e8781a', text: '#c05f00' },
+  'ドリブンズ': { bg: '#fff4e6', border: '#e8781a', text: '#c05f00' },
+  // 渋谷ABEMAS → 水色/シアン
+  'ABEMAS': { bg: '#e6f7ff', border: '#0ea5e9', text: '#0369a1' },
+  '渋谷': { bg: '#e6f7ff', border: '#0ea5e9', text: '#0369a1' },
+  // KONAMI麻雀格闘倶楽部 → 赤
+  'KONAMI': { bg: '#fff1f1', border: '#dc2626', text: '#b91c1c' },
+  '格闘倶楽部': { bg: '#fff1f1', border: '#dc2626', text: '#b91c1c' },
+  '麻雀格闘倶楽部': { bg: '#fff1f1', border: '#dc2626', text: '#b91c1c' },
+  // U-NEXTパイレーツ → 黒/ゴールド
+  'パイレーツ': { bg: '#fafaf0', border: '#92400e', text: '#78350f' },
+  'U-NEXT': { bg: '#fafaf0', border: '#92400e', text: '#78350f' },
+  // 雷電 (セガサミー) → 紫
+  '雷電': { bg: '#f5f3ff', border: '#7c3aed', text: '#5b21b6' },
+  'セガサミー': { bg: '#f5f3ff', border: '#7c3aed', text: '#5b21b6' },
+  // BEAST Japanext → 緑
+  'BEAST': { bg: '#f0fdf4', border: '#16a34a', text: '#15803d' },
+  'Japanext': { bg: '#f0fdf4', border: '#16a34a', text: '#15803d' },
+  // サクラナイツ → ピンク/青
+  'サクラナイツ': { bg: '#fff0f5', border: '#e85d8a', text: '#c9395f' },
+  'KADOKAWA': { bg: '#e8f0fc', border: '#003087', text: '#003087' },
+  // 麻雀一択さんず → 黄
+  'さんず': { bg: '#fefce8', border: '#ca8a04', text: '#92400e' },
+  '一択': { bg: '#fefce8', border: '#ca8a04', text: '#92400e' },
+};
+
+function getTeamColor(name) {
+  if (!name) return null;
+  for (const [key, color] of Object.entries(teamColors)) {
+    if (name.includes(key)) return color;
+  }
+  return { bg: '#f4f4f8', border: '#6b7494', text: '#374064' };
+}
+
+// ===== CSV読み込み =====
+async function loadSchedule() {
+  const container = document.getElementById('schedule-container');
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSFcnWn02BhJtSrdLuy3W9GF7XwH2tCAFf9Rx4735UKkepeN7vFs29SVgCR3n-bCF9BVmR3Zpd0Z6Zi/pub?gid=0&single=true&output=csv';
+
+  try {
+    const res = await fetch(CSV_URL);
+    if (!res.ok) throw new Error('fetch failed');
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    if (rows.length <= 1) {
+      container.innerHTML = '<div class="loading-msg">スケジュールデータがありません。</div>';
+      return;
+    }
+
+    // 1行目はヘッダーとして無視し、データ行を処理
+    // 列順: 日付, 内容, 先発選手, 対戦チームA, 対戦チームB, 対戦チームC, コメント
+    const dataRows = rows.slice(1).filter(r => r.some(c => c.trim()));
+
+    if (dataRows.length === 0) {
+      container.innerHTML = '<div class="loading-msg">スケジュールデータがありません。</div>';
+      return;
+    }
+
+    container.innerHTML = '';
+    dataRows.forEach(row => {
+      const [date, type, player, teamA, teamB, teamC, comment] = row.map(c => c.trim());
+
+      const teams = [teamA, teamB, teamC].filter(Boolean);
+      const teamsHTML = teams.map(t => {
+        const c = getTeamColor(t);
+        return c
+          ? `<span class="team-tag" style="background:${c.bg};border-color:${c.border};color:${c.text};">${t}</span>`
+          : `<span class="team-tag">${t}</span>`;
+      }).join('');
+
+      const commentHTML = comment ? `<div class="card-comment">💬 ${comment}</div>` : '';
+
+      const card = document.createElement('div');
+      card.className = 'schedule-card';
+      card.innerHTML = `
+        ${date ? `<div class="card-date">${date}</div>` : ''}
+        <div class="card-header">
+          <div class="card-type">${type || '―'}</div>
+        </div>
+        ${player ? `<div class="card-player"><span>先発</span>${player}</div>` : ''}
+        ${teams.length > 0 ? `<div class="card-teams">${teamsHTML}</div>` : ''}
+        ${commentHTML}
+      `;
+      container.appendChild(card);
+    });
+  } catch (e) {
+    container.innerHTML = '<div class="error-msg">⚠️ スケジュールの読み込みに失敗しました。ネットワーク環境をご確認ください。</div>';
+  }
+}
+
+function parseCSV(text) {
+  const rows = [];
+  const lines = text.split('\n');
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const row = [];
+    let inQuote = false, cell = '';
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuote && line[i+1] === '"') { cell += '"'; i++; }
+        else inQuote = !inQuote;
+      } else if (ch === ',' && !inQuote) {
+        row.push(cell); cell = '';
+      } else {
+        cell += ch;
+      }
+    }
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows;
+}
+
+// ===== 桜吹雪 =====
+function createPetals() {
+  const wrap = document.getElementById('petals');
+  for (let i = 0; i < 8; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = '🌸';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    p.style.fontSize = (0.7 + Math.random() * 0.8) + 'rem';
+    wrap.appendChild(p);
+  }
+}
+
+loadSchedule();
+createPetals();
+</script>
+</body>
+</html>
