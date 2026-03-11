@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KADOKAWAサクラナイツ｜インターンSNS業務マニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sakura-100: #fff0f3;
+    --sakura-200: #ffd6e0;
+    --sakura-300: #ffb3c6;
+    --sakura-400: #ff8fab;
+    --sakura-500: #e85d8a;
+    --sakura-600: #c9395f;
+    --kadokawa-blue: #003087;
+    --kadokawa-blue-light: #0050b3;
+    --kadokawa-blue-pale: #e8f0fc;
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-600: #52525b;
+    --gray-800: #27272a;
+    --text: #1a1a2e;
+    --success: #16a34a;
+    --success-pale: #f0fdf4;
+    --warning: #d97706;
+    --warning-pale: #fffbeb;
+    --danger: #dc2626;
+    --danger-pale: #fef2f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--gray-50);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--kadokawa-blue) 0%, #001a5c 60%, #0a0a2e 100%);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,48,135,0.4);
+  }
+
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-emblem { width: 48px; height: 48px; flex-shrink: 0; }
+  .sakura-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(255,143,171,0.7)); }
+
+  .header-text h1 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .header-text p { font-size: 0.7rem; color: var(--sakura-300); letter-spacing: 0.12em; margin-top: 2px; }
+
+  .header-badge {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* ===== TAB NAV ===== */
+  .tab-nav {
+    background: white;
+    border-bottom: 2px solid var(--sakura-200);
+    position: sticky;
+    top: 81px;
+    z-index: 90;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .tab-nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-nav-inner::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    padding: 14px 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--gray-600);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-btn:hover { color: var(--kadokawa-blue); background: var(--kadokawa-blue-pale); }
+  .tab-btn.active {
+    color: var(--kadokawa-blue);
+    border-bottom-color: var(--sakura-500);
+    background: var(--sakura-100);
+  }
+
+  /* ===== MAIN ===== */
+  main { max-width: 1000px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ===== SECTION ===== */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== INTRO CARD ===== */
+  .intro-card {
+    background: linear-gradient(135deg, var(--kadokawa-blue-pale), #fff0f5);
+    border: 1px solid var(--sakura-200);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .intro-card h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .intro-card p { font-size: 0.85rem; line-height: 1.9; color: var(--gray-600); }
+  .intro-card strong { color: var(--sakura-600); }
+
+  /* ===== CARD ===== */
+  .card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-200);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,48,135,0.06);
+  }
+
+  .card-title {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sakura-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== HOW TO ===== */
+  .howto-box {
+    background: var(--kadokawa-blue-pale);
+    border-left: 4px solid var(--kadokawa-blue);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+  }
+  .howto-box .howto-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .howto-box .howto-steps {
+    font-size: 0.83rem;
+    line-height: 1.9;
+    color: var(--gray-800);
+  }
+  .howto-box .howto-steps code {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: 'Noto Sans JP', monospace;
+    color: var(--kadokawa-blue);
+    font-size: 0.8rem;
+  }
+  .arrow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .arrow-step .arrow { color: var(--sakura-500); font-weight: 900; flex-shrink: 0; }
+  .arrow-step .step-text { font-size: 0.83rem; line-height: 1.7; }
+
+  /* ===== DECISION FLOW ===== */
+  .decision-flow { margin-bottom: 16px; }
+  .decision-flow-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .flow-item {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .flow-condition {
+    flex: 1;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    background: white;
+  }
+  .flow-condition .cond-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .flow-arrow { display: flex; align-items: center; font-size: 1.2rem; color: var(--gray-600); flex-shrink: 0; }
+  .flow-result {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .flow-result.ok { background: var(--success-pale); color: var(--success); border: 1.5px solid #86efac; }
+  .flow-result.ng { background: var(--danger-pale); color: var(--danger); border: 1.5px solid #fca5a5; }
+  .flow-result.check { background: var(--warning-pale); color: var(--warning); border: 1.5px solid #fcd34d; }
+
+  /* ===== ALERT ===== */
+  .alert {
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+  }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-icon { flex-shrink: 0; font-size: 1rem; }
+  .alert.success { background: var(--success-pale); border-left: 4px solid var(--success); color: #15803d; }
+  .alert.danger { background: var(--danger-pale); border-left: 4px solid var(--danger); color: #b91c1c; }
+  .alert.warning { background: var(--warning-pale); border-left: 4px solid var(--warning); color: #92400e; }
+  .alert.info { background: var(--kadokawa-blue-pale); border-left: 4px solid var(--kadokawa-blue-light); color: var(--kadokawa-blue); }
+  .alert.sakura { background: var(--sakura-100); border-left: 4px solid var(--sakura-500); color: var(--sakura-600); }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-200);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.83rem;
+    line-height: 1.6;
+    background: white;
+  }
+  .check-item:hover { border-color: var(--sakura-400); background: var(--sakura-100); }
+  .check-item.checked { border-color: var(--success); background: var(--success-pale); color: #15803d; }
+  .check-item input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: var(--sakura-500); width: 16px; height: 16px; }
+
+  /* ===== SUBSECTION ===== */
+  .subsection-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .subsection-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(to bottom, var(--sakura-500), var(--kadokawa-blue));
+    border-radius: 2px;
+  }
+
+  /* ===== TAG GRID ===== */
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .tag.ok { background: var(--success-pale); color: var(--success); border: 1px solid #86efac; }
+  .tag.ng { background: var(--danger-pale); color: var(--danger); border: 1px solid #fca5a5; }
+
+  /* ===== AI GUIDE ===== */
+  .ai-accordion { margin-top: 16px; }
+  .ai-accordion-btn {
+    width: 100%;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, var(--kadokawa-blue-pale), var(--sakura-100));
+    border: 1.5px solid var(--sakura-200);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.18s;
+  }
+  .ai-accordion-btn:hover { background: var(--sakura-100); }
+  .ai-accordion-btn .chevron { transition: transform 0.2s; font-size: 0.9rem; }
+  .ai-accordion-btn.open .chevron { transform: rotate(180deg); }
+
+  .ai-accordion-body {
+    display: none;
+    padding: 20px;
+    border: 1.5px solid var(--sakura-200);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    background: white;
+  }
+  .ai-accordion-body.open { display: block; }
+
+  .ai-point {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .ai-point:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .ai-point-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--sakura-600);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ai-point-body { font-size: 0.8rem; line-height: 1.8; color: var(--gray-600); }
+  .ai-point-body ul { padding-left: 16px; }
+  .ai-point-body li { margin-bottom: 4px; }
+
+  /* ===== TIMING TABLE ===== */
+  .timing-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+  }
+  .timing-table th {
+    background: var(--kadokawa-blue);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+  .timing-table th:first-child { border-radius: 8px 0 0 0; }
+  .timing-table th:last-child { border-radius: 0 8px 0 0; }
+  .timing-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+  .timing-table tr:nth-child(even) td { background: var(--gray-50); }
+  .timing-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .timing-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .timing-table .avoid { color: var(--danger); font-weight: 700; }
+  .timing-table .ok { color: var(--success); font-weight: 700; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-header-icon { font-size: 2rem; }
+  .section-header h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.04em;
+  }
+  .section-header p { font-size: 0.75rem; color: rgba(255,255,255,0.85); margin-top: 3px; }
+
+  .section-header.blue {
+    background: linear-gradient(135deg, var(--kadokawa-blue), var(--kadokawa-blue-light));
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--sakura-300), transparent);
+    margin: 24px 0;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.72rem;
+    color: var(--gray-600);
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 640px) {
+    main { padding: 20px 16px 60px; }
+    .card { padding: 20px 16px; }
+    .flow-item { flex-direction: column; gap: 4px; }
+    .flow-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-emblem">
+      <svg class="sakura-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,50)">
+          <ellipse cx="0" cy="-22" rx="10" ry="18" fill="#ffb3c6" transform="rotate(0)"/>
+          <ellipse cx="0" cy="-22" rx="10" ry="18" fill="#ff8fab" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-22" rx="10" ry="18" fill="#ffb3c6" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-22" rx="10" ry="18" fill="#ff8fab" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-22" rx="10" ry="18" fill="#ffb3c6" transform="rotate(288)"/>
+          <circle cx="0" cy="0" r="10" fill="#ffd6e0"/>
+          <circle cx="0" cy="0" r="5" fill="#e85d8a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>KADOKAWAサクラナイツ</h1>
+      <p>INTERN SNS TASK MANUAL</p>
+    </div>
+    <div class="header-badge">インターン用</div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('community')">🏯 ①コミュニティ承認</button>
+    <button class="tab-btn" onclick="switchTab('illust')">🌸 ②イラストチェック</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== SECTION: COMMUNITY ===== -->
+  <section class="section active" id="sec-community">
+
+    <div class="section-header blue">
+      <div class="section-header-icon">🏯</div>
+      <div>
+        <h2>① コミュニティ（桜騎士団）メンバー追加チェック</h2>
+        <p>サクラナイツXアカウントにアクセスのたびに入団申請を確認してください</p>
+      </div>
+    </div>
+
+    <!-- HOW TO -->
+    <div class="card">
+      <div class="card-title">📱 やり方（ブラウザから）</div>
+      <div class="howto-box">
+        <div class="howto-label">🔍 アクセス手順</div>
+        <div class="arrow-step">
+          <span class="arrow">①</span>
+          <span class="step-text">サクラナイツのXアカウントにアクセス</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">②</span>
+          <span class="step-text"><code>もっと見る</code> をタップ</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">③</span>
+          <span class="step-text"><code>コミュニティ</code> → <code>桜騎士団</code> を選択</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">④</span>
+          <span class="step-text">右上の <code>⚙️ 歯車マーク</code> をタップ（数字が付いていたら申請あり）</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">⑤</span>
+          <span class="step-text"><code>メンバーリクエスト</code> で入団希望者を確認・判断する</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 承認フロー -->
+    <div class="card">
+      <div class="card-title">✅ 承認・非承諾の判断フロー</div>
+
+      <div class="alert info">
+        <span class="alert-icon">ℹ️</span>
+        <span>スパムアカウントの承諾を避けることが目的です。下記のフローに沿って判断してください。</span>
+      </div>
+
+      <div class="subsection-title">まず確認：すぐ承認できるアカウント</div>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"> アカウント名が<strong>日本語</strong>で、プロフィールに「サクラナイツ」「Mリーグ」への言及がある</label>
+        <label class="check-item"><input type="checkbox"> <strong>鍵アカウント</strong>（🔒）である ※スパムである可能性がほとんどないため承認OK</label>
+        <label class="check-item"><input type="checkbox"> <strong>フォロワー数が100以上</strong>ある ※一般ユーザーの可能性が高い</label>
+        <label class="check-item"><input type="checkbox"> <strong>アイコン・ヘッダーが設定されていて、プロフィール文がある</strong> ※実在感のある作り込まれたアカウント</label>
+      </div>
+      <div class="alert success" style="margin-bottom:20px;">
+        <span class="alert-icon">✅</span>
+        <span>上記のいずれかに当てはまる場合は<strong>承認OK</strong>です。</span>
+      </div>
+
+      <div class="subsection-title">それ以外のアカウント：名前をクリックして投稿を確認</div>
+
+      <div class="decision-flow">
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--success);">✅ 承認OK</div>
+            <strong>日常的なポストをしている</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">普通の人間のアカウントと判断できるため</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result ok">承認 OK</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--success);">✅ 承認OK</div>
+            <strong>ほとんどポストしていない、またはリポストがほとんど</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">閲覧用アカウントの可能性が高いため</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result ok">承認 OK</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--danger);">🚫 非承諾</div>
+            <strong>ポスト内容がアフィリエイト誘導 / 情報商材 / アダルト系</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">スパムアカウントの可能性が極めて高い</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result ng">非承諾</div>
+        </div>
+      </div>
+
+      <div class="subsection-title">🔥 要注意：他の要素と合わせて判断するアカウント</div>
+      <div class="decision-flow">
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--warning);">🔥 要注意</div>
+            <strong>アカウント作成日が極めて新しい（数日〜数週間以内）かつポストがほぼない</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">申請目的で急作成されたスパムの典型パターン</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result check">他の要素と合わせて判断</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--warning);">🔥 要注意</div>
+            <strong>フォロー数がフォロワー数を大幅に上回っている</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">例：フォロー5,000・フォロワー20など。フォロバ目的の量産アカウントに多いパターン</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result check">他の要素と合わせて判断</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--warning);">🔥 要注意</div>
+            <strong>アイコンが人物の顔写真で、プロフィールに不自然な外国語や宣伝文句が混じっている</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">乗っ取り・なりすましアカウントに多いパターン</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result check">他の要素と合わせて判断</div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-condition">
+            <div class="cond-label" style="color:var(--warning);">🔥 要注意</div>
+            <strong>ポストの言語が日本語でない（英語・中国語など）かつ内容がMリーグと無関係</strong><br>
+            <span style="font-size:0.78rem;color:var(--gray-600);">国外スパムアカウントの可能性</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-result check">他の要素と合わせて判断</div>
+        </div>
+      </div>
+
+      <div class="alert warning" style="margin-bottom:16px;">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>「報告されたポスト」があるアカウントは自己判断しない！</strong><br>
+          稲垣に一報を入れてください。担当者が判断します。
+        </div>
+      </div>
+
+      <div class="subsection-title">⚡ 判断に迷ったときは稲垣に確認</div>
+      <div class="alert danger">
+        <span class="alert-icon">⚡</span>
+        <div>
+          <strong>以下の場合は自己判断せず、必ず稲垣に一報を入れてください</strong>
+          <ul style="margin-top:8px;padding-left:16px;line-height:2;">
+            <li>上記の🔥要注意項目が<strong>複数重なっている</strong>アカウント</li>
+            <li>申請が<strong>短時間に大量に来ている</strong>（10件以上など） → 組織的スパムの可能性</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== SECTION: ILLUST ===== -->
+  <section class="section" id="sec-illust">
+
+    <div class="section-header">
+      <div class="section-header-icon">🌸</div>
+      <div>
+        <h2>② #桜援イラスト チェック</h2>
+        <p>市ヶ谷出社時に1日1回程度実施してください</p>
+      </div>
+    </div>
+
+    <!-- HOW TO -->
+    <div class="card">
+      <div class="card-title">📱 やり方（ブラウザから）</div>
+      <div class="howto-box">
+        <div class="howto-label">🔍 検索・確認手順</div>
+        <div class="arrow-step">
+          <span class="arrow">①</span>
+          <span class="step-text">右上の検索窓で <code>#桜援イラスト</code> と検索</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">②</span>
+          <span class="step-text"><code>最新</code> タブで並べ替え</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">③</span>
+          <span class="step-text"><strong>2026年3月1日以降</strong>の新規イラストを確認する</span>
+        </div>
+        <div class="arrow-step">
+          <span class="arrow">④</span>
+          <span class="step-text">対象イラストに「リポスト」「いいね」を付ける</span>
+        </div>
+      </div>
+      <div class="alert sakura" style="margin-top:8px;">
+        <span class="alert-icon">🌸</span>
+        <span>#桜援イラスト の投稿を積極的に増やすため、積極的にリポストしていきます！</span>
+      </div>
+    </div>
+
+    <!-- タイミング -->
+    <div class="card">
+      <div class="card-title">🕐 リポストのタイミング</div>
+
+      <table class="timing-table">
+        <thead>
+          <tr>
+            <th>状況</th>
+            <th>リポスト</th>
+            <th>理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>通常時</td>
+            <td class="ok">✅ OK</td>
+            <td>積極的に行う</td>
+          </tr>
+          <tr>
+            <td>試合中・イベント中</td>
+            <td class="avoid">🚫 避ける</td>
+            <td>試合・イベントに集中</td>
+          </tr>
+          <tr>
+            <td>先発告知・イベント告知から<strong>1時間以内</strong></td>
+            <td class="avoid">🚫 避ける</td>
+            <td>告知投稿がイラストRTで埋もれないようにするため</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- リポストNG -->
+    <div class="card">
+      <div class="card-title">🚫 リポスト・いいねを避けるイラスト</div>
+
+      <div class="subsection-title">コンテンツの内容で判断</div>
+      <div class="alert danger">
+        <span class="alert-icon">🚫</span>
+        <div>
+          <strong>以下は必ず避けてください</strong>
+          <ul style="margin-top:6px;padding-left:16px;line-height:1.9;">
+            <li>アダルト系・センシティブな表現を含むもの</li>
+            <li>チームに否定的な内容のもの</li>
+            <li>見ている人に不快感を与えるもの</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">ℹ️</span>
+        <span>イラストのクオリティ（画力）については、極端に問題がなければ気にしなくて大丈夫です。</span>
+      </div>
+
+      <div class="subsection-title">⚠️ 生成AIイラストは必ず避ける</div>
+      <div class="alert warning">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>生成AIイラストのリポスト・いいねは避けてください</strong><br>
+          容認派・否定派の対立が激しく、炎上につながるケースが多いです。
+        </div>
+      </div>
+
+      <!-- AI見分け方アコーディオン -->
+      <div class="ai-accordion">
+        <button class="ai-accordion-btn" onclick="toggleAI(this)">
+          <span>🤖 生成AIイラストの見分け方（クリックで展開）</span>
+          <span class="chevron">▼</span>
+        </button>
+        <div class="ai-accordion-body">
+
+          <div class="ai-point">
+            <div class="ai-point-title">👁️ 1. 身体のパーツの不自然さ</div>
+            <div class="ai-point-body">
+              <ul>
+                <li><strong>手・指先：</strong>指の数が6本あったり、関節が不自然な方向に曲がっている。隣の指や持ち物と融合している</li>
+                <li><strong>髪の毛：</strong>毛束の先が服・肌に溶け込んでいる。突然太くなったり不自然に枝分かれする</li>
+                <li><strong>瞳（目）：</strong>左右でサイズ・形が異なる。ハイライトの入り方が左右でバラバラ</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ai-point">
+            <div class="ai-point-title">👗 2. 装飾品・服のディテール</div>
+            <div class="ai-point-body">
+              <ul>
+                <li><strong>謎のパーツ融合：</strong>ネックレスのチェーンが途中で服の模様に変わる。ボタンやフリルが別の物体に変化</li>
+                <li><strong>左右非対称：</strong>ピアス・靴・服の対称的な模様が左右で全く異なるデザインになっている</li>
+                <li><strong>文字・ロゴ：</strong>背景の看板、服のロゴ、本の文字などが「謎の象形文字のような記号」になっている（AIの典型的な特徴）</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ai-point">
+            <div class="ai-point-title">🏞️ 3. 背景と空間の違和感</div>
+            <div class="ai-point-body">
+              <ul>
+                <li><strong>構造の矛盾：</strong>柱が途中で消える、階段の段差がおかしい、テーブルの脚の数が合わない</li>
+                <li><strong>物体の境界線：</strong>コップと本がドロっと溶け合っている。背景のモブキャラの顔がのっぺらぼうになっている</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ai-point">
+            <div class="ai-point-title">📊 4. 投稿者の傾向で判断（SNSの場合）</div>
+            <div class="ai-point-body">
+              <ul>
+                <li><strong>異常な投稿頻度：</strong>高品質な描き込みイラストを1日に何枚も・毎日欠かさず投稿している</li>
+                <li><strong>画風のブレ：</strong>投稿ごとに絵柄がコロコロ変わる。ある日を境に突然プロ並みの画力に跳ね上がっている</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert warning" style="margin-top:8px;">
+            <span class="alert-icon">⚠️</span>
+            <span>判断に迷う場合は担当スタッフに確認してから行動してください。</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  KADOKAWAサクラナイツ インターンSNS業務マニュアル ／ 内部資料・取り扱い注意
+</footer>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAI(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      this.closest('.check-item').classList.toggle('checked', this.checked);
+    });
+  });
+</script>
+</body>
+</html>

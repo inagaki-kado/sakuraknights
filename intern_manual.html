@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KADOKAWAサクラナイツ｜インターンスタッフマニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sakura-100: #fff0f3;
+    --sakura-200: #ffd6e0;
+    --sakura-300: #ffb3c6;
+    --sakura-400: #ff8fab;
+    --sakura-500: #e85d8a;
+    --sakura-600: #c9395f;
+    --kadokawa-blue: #003087;
+    --kadokawa-blue-light: #0050b3;
+    --kadokawa-blue-pale: #e8f0fc;
+    --gold: #b8963a;
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-600: #52525b;
+    --gray-800: #27272a;
+    --text: #1a1a2e;
+    --success: #16a34a;
+    --success-pale: #f0fdf4;
+    --warning: #d97706;
+    --warning-pale: #fffbeb;
+    --danger: #dc2626;
+    --danger-pale: #fef2f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--gray-50);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--kadokawa-blue) 0%, #001a5c 60%, #0a0a2e 100%);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,48,135,0.4);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-emblem { width: 48px; height: 48px; flex-shrink: 0; }
+
+  .sakura-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(255,143,171,0.7)); }
+
+  .header-text h1 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .header-text p { font-size: 0.7rem; color: var(--sakura-300); letter-spacing: 0.12em; margin-top: 2px; }
+
+  .header-badge {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* ===== LAYOUT ===== */
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    position: sticky;
+    top: 88px;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--gray-200);
+    padding: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,48,135,0.06);
+    overflow: hidden;
+  }
+
+  .sidebar-title {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    letter-spacing: 0.12em;
+    padding: 0 18px 12px;
+    border-bottom: 2px solid var(--sakura-200);
+    margin-bottom: 8px;
+  }
+
+  .sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar nav a:hover {
+    background: var(--sakura-100);
+    color: var(--sakura-600);
+    border-left-color: var(--sakura-400);
+  }
+
+  .sidebar nav a.active {
+    background: var(--kadokawa-blue-pale);
+    color: var(--kadokawa-blue);
+    border-left-color: var(--kadokawa-blue);
+    font-weight: 700;
+  }
+
+  .sidebar nav a .nav-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--kadokawa-blue-pale) 0%, #fff0f5 100%);
+    border: 1px solid var(--sakura-200);
+    border-radius: 18px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '🌸';
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--sakura-600);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hero h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--gray-600);
+    max-width: 640px;
+  }
+
+  .hero-meta {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta span {
+    font-size: 0.72rem;
+    color: var(--gray-600);
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-200);
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,48,135,0.06);
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px;
+    border-bottom: 2px solid var(--sakura-100);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .section-header:hover { background: var(--gray-50); }
+
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .icon-blue { background: var(--kadokawa-blue-pale); }
+  .icon-pink { background: var(--sakura-100); }
+  .icon-warning { background: var(--warning-pale); }
+  .icon-success { background: var(--success-pale); }
+  .icon-gold { background: #fef9ee; }
+
+  .section-title-wrap { flex: 1; }
+
+  .section-title {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    letter-spacing: 0.03em;
+  }
+
+  .section-sub {
+    font-size: 0.72rem;
+    color: var(--gray-600);
+    margin-top: 2px;
+  }
+
+  .toggle-arrow {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .section.open .toggle-arrow { transform: rotate(180deg); }
+
+  .section-body {
+    display: none;
+    padding: 24px 28px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .section.open .section-body { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== CONTENT ELEMENTS ===== */
+  .text-body {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--gray-600);
+  }
+
+  .text-body + .text-body { margin-top: 12px; }
+
+  .text-body a {
+    color: var(--kadokawa-blue-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .text-body a:hover { color: var(--sakura-600); }
+
+  /* RULE CARDS */
+  .rule-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .rule-card {
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.87rem;
+    line-height: 1.8;
+  }
+
+  .rule-card.danger {
+    background: var(--danger-pale);
+    border: 1px solid #fecaca;
+    color: #7f1d1d;
+  }
+
+  .rule-card.warning {
+    background: var(--warning-pale);
+    border: 1px solid #fde68a;
+    color: #78350f;
+  }
+
+  .rule-card.info {
+    background: var(--kadokawa-blue-pale);
+    border: 1px solid #bfdbfe;
+    color: #1e3a5f;
+  }
+
+  .rule-card.success {
+    background: var(--success-pale);
+    border: 1px solid #bbf7d0;
+    color: #14532d;
+  }
+
+  .rule-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  .rule-card strong { display: block; font-weight: 700; margin-bottom: 4px; }
+
+  /* NOTE */
+  .note {
+    background: var(--sakura-100);
+    border-left: 4px solid var(--sakura-400);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: var(--sakura-600);
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+
+  .note-blue {
+    background: var(--kadokawa-blue-pale);
+    border-left-color: var(--kadokawa-blue-light);
+    color: var(--kadokawa-blue);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 18px 0;
+  }
+
+  /* TASK SECTION */
+  .task-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) { .task-grid { grid-template-columns: 1fr; } }
+
+  .task-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .task-card-title {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .task-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .task-card ul li {
+    font-size: 0.82rem;
+    color: var(--gray-600);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.6;
+  }
+
+  .task-card ul li::before {
+    content: '▸';
+    color: var(--sakura-500);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .badge-future {
+    display: inline-block;
+    font-size: 0.65rem;
+    background: var(--kadokawa-blue-pale);
+    color: var(--kadokawa-blue);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  /* PHASE FLOW */
+  .phase-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+
+  .phase-step {
+    background: var(--kadokawa-blue-pale);
+    border: 1.5px solid var(--kadokawa-blue-light);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    white-space: nowrap;
+  }
+
+  .phase-arrow {
+    color: var(--sakura-400);
+    font-size: 1.2rem;
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* LINK LIST */
+  .link-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.15s;
+    color: var(--text);
+  }
+
+  .link-item:hover {
+    background: var(--kadokawa-blue-pale);
+    border-color: var(--kadokawa-blue-light);
+    transform: translateX(4px);
+  }
+
+  .link-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .link-item-text { flex: 1; }
+  .link-item-title { font-size: 0.85rem; font-weight: 700; color: var(--kadokawa-blue); }
+  .link-item-desc { font-size: 0.72rem; color: var(--gray-600); margin-top: 2px; }
+  .link-item-arrow { color: var(--gray-200); font-size: 0.9rem; }
+  .link-item:hover .link-item-arrow { color: var(--kadokawa-blue-light); }
+
+  /* COMPLIANCE */
+  .compliance-intro {
+    background: linear-gradient(135deg, #1a1a3e, #003087);
+    color: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+
+  .compliance-intro strong { color: var(--sakura-300); }
+
+  .compliance-items { display: flex; flex-direction: column; gap: 12px; }
+
+  .compliance-item {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .compliance-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--kadokawa-blue-pale);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+  }
+
+  .compliance-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--kadokawa-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .compliance-item-body {
+    padding: 12px 16px;
+    background: white;
+  }
+
+  .compliance-item-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .compliance-item-body ul li {
+    font-size: 0.82rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .compliance-item-body ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--sakura-400);
+  }
+
+  /* EMERGENCY */
+  .emergency-box {
+    background: linear-gradient(135deg, #7f1d1d, #dc2626);
+    border-radius: 12px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .emergency-icon { font-size: 2rem; flex-shrink: 0; }
+
+  .emergency-text { color: white; }
+  .emergency-text strong { display: block; font-size: 0.78rem; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 4px; }
+  .emergency-text span { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 1.15rem; font-weight: 900; }
+
+  /* CONTACT */
+  .contact-box {
+    background: var(--kadokawa-blue-pale);
+    border-radius: 12px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .contact-text { color: var(--kadokawa-blue); }
+  .contact-text strong { display: block; font-size: 0.75rem; letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.8; }
+  .contact-text span { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 1rem; font-weight: 900; }
+  .contact-icon { font-size: 1.8rem; }
+
+  /* FOOTER */
+  footer {
+    background: linear-gradient(135deg, var(--kadokawa-blue) 0%, #001a5c 100%);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    font-size: 0.72rem;
+    padding: 24px;
+    letter-spacing: 0.08em;
+    margin-top: 40px;
+  }
+
+  footer strong { color: var(--sakura-300); }
+
+  /* SNS GRID */
+  .sns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .sns-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    transition: all 0.15s;
+  }
+
+  .sns-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+  .sns-twitter:hover { border-color: #1da1f2; color: #1da1f2; }
+  .sns-youtube:hover { border-color: #ff0000; color: #ff0000; }
+  .sns-instagram:hover { border-color: #e1306c; color: #e1306c; }
+  .sns-tiktok:hover { border-color: #010101; color: #010101; }
+  .sns-fan:hover { border-color: var(--sakura-500); color: var(--sakura-600); }
+  .sns-official:hover { border-color: var(--kadokawa-blue); color: var(--kadokawa-blue); }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <div class="header-emblem">
+      <svg class="sakura-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="22" rx="12" ry="22" fill="#ff8fab" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="22" rx="12" ry="22" fill="#ffb3c6" transform="rotate(72 50 50)"/>
+        <ellipse cx="50" cy="22" rx="12" ry="22" fill="#ff8fab" transform="rotate(144 50 50)"/>
+        <ellipse cx="50" cy="22" rx="12" ry="22" fill="#ffb3c6" transform="rotate(216 50 50)"/>
+        <ellipse cx="50" cy="22" rx="12" ry="22" fill="#ff8fab" transform="rotate(288 50 50)"/>
+        <circle cx="50" cy="50" r="10" fill="#fff0f3"/>
+        <circle cx="50" cy="50" r="5" fill="#e85d8a"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>KADOKAWAサクラナイツ</h1>
+      <p>INTERN STAFF MANUAL</p>
+    </div>
+    <div class="header-badge">ver.2026/02/03</div>
+  </div>
+</header>
+
+<!-- ===== LAYOUT ===== -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">📋 目次</div>
+    <nav>
+      <a href="#welcome" class="nav-link"><span class="nav-icon">👋</span> はじめに</a>
+      <a href="#about" class="nav-link"><span class="nav-icon">🀄</span> Mリーグ・サクラナイツとは</a>
+      <a href="#basics" class="nav-link"><span class="nav-icon">💬</span> 基本的なこと</a>
+      <a href="#rules" class="nav-link"><span class="nav-icon">⚠️</span> 気を付けて欲しいこと</a>
+      <a href="#tasks" class="nav-link"><span class="nav-icon">📋</span> 具体的な業務</a>
+      <a href="#links" class="nav-link"><span class="nav-icon">🔗</span> お役立ちリンク集</a>
+      <a href="#compliance" class="nav-link"><span class="nav-icon">📜</span> コンプライアンスポリシー</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-label">🌸 KADOKAWA SAKURA KNIGHTS</div>
+      <h2>インターンスタッフ<br>マニュアル</h2>
+      <p>
+        この度はKADOKAWA・Mリーグ運営室にインターンシップという形で参加いただき、まことにありがとうございます。
+        皆様の力でサクラナイツやMリーグを一緒に盛り上げていきましょう！
+      </p>
+      <div class="hero-meta">
+        <span>📅 ver.2026/02/03</span>
+        <span>✍️ 作成：Mリーグ運営室 稲垣健</span>
+      </div>
+    </div>
+
+    <!-- ===== はじめに ===== -->
+    <div class="section open" id="welcome">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-pink">👋</div>
+        <div class="section-title-wrap">
+          <div class="section-title">はじめに</div>
+          <div class="section-sub">インターンシップへようこそ</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+        <p class="text-body">
+          この度は株式会社KADOKAWA・Mリーグ運営室にインターンシップという形で参加いただき、まことにありがとうございます。
+        </p>
+        <p class="text-body">
+          私たちが参加しているMリーグというプロ麻雀リーグはまだ成立してから日が浅く、色々な可能性のある業界だと感じております。また、そのような業界で若い皆様のお力を借りられることを、非常に心強く感じております。
+        </p>
+        <p class="text-body">
+          皆様の力でKADOKAWAサクラナイツやMリーグを盛り上げていただくと共に、サクラナイツのチーム運営を通じて、Mリーグのみならずコンテンツ業界全般に対して知見を深めていただき、今後の人生の糧にしていただければと思います。
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== Mリーグとは ===== -->
+    <div class="section open" id="about">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-blue">🀄</div>
+        <div class="section-title-wrap">
+          <div class="section-title">Mリーグとは／サクラナイツとは</div>
+          <div class="section-sub">チームの基本情報</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+        <p class="text-body">
+          Mリーグやサクラナイツについて基本的なことは
+          <a href="https://docs.google.com/presentation/d/1_dUEyJ76-auKx-GX-c7I-hPFW57LKcmP/edit?usp=sharing&ouid=115659367498830107259&rtpof=true&sd=true" target="_blank">こちらの社内説明用資料</a>
+          にまとめてあります。より詳しく聞きたいことがあれば、ぜひ運営室メンバーに聞いてください！
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== 基本的なこと ===== -->
+    <div class="section open" id="basics">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-blue">💬</div>
+        <div class="section-title-wrap">
+          <div class="section-title">基本的なこと</div>
+          <div class="section-sub">日常業務のルールと連絡体制</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+        <div class="rule-list">
+          <div class="rule-card info">
+            <div class="rule-icon">💬</div>
+            <div>
+              <strong>連絡はSlackで</strong>
+              緊急時以外の重要な連絡事項は<a href="http://kadokawa.slack.com" target="_blank">Slack</a>でお願いします。口頭ベースでは伝達ミスなどが発生するため、可能な限りSlackでお願いします。
+            </div>
+          </div>
+          <div class="rule-card success">
+            <div class="rule-icon">🙋</div>
+            <div>
+              <strong>困ったときは遠慮なく聞いてください</strong>
+              仕事のことで困ったり悩んだりすることがあれば、遠慮なく上長に聞いてください。同じことを何度聞いても大丈夫ですので、遠慮はしないでください。
+            </div>
+          </div>
+        </div>
+
+        <div class="emergency-box">
+          <div class="emergency-icon">🚨</div>
+          <div class="emergency-text">
+            <strong>緊急連絡先</strong>
+            <span>森井 巧：080-6680-0201</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 気を付けて欲しいこと ===== -->
+    <div class="section open" id="rules">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-warning">⚠️</div>
+        <div class="section-title-wrap">
+          <div class="section-title">気を付けて欲しいこと</div>
+          <div class="section-sub">スタッフとして守るべきルール</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+        <div class="rule-list">
+
+          <div class="rule-card warning">
+            <div class="rule-icon">🏢</div>
+            <div>
+              <strong>KADOKAWAの一員としての自覚と責任</strong>
+              外部の方はあなたの行動を見てKADOKAWAを評価すると思ってください。常にKADOKAWAの一員である自覚と責任を持って行動してください。
+            </div>
+          </div>
+
+          <div class="rule-card danger">
+            <div class="rule-icon">📵</div>
+            <div>
+              <strong>個人SNSでのスタッフ情報の公開禁止</strong>
+              原則としてオープンな場での個人のSNSアカウントに、自分が「KADOKAWAサクラナイツのスタッフである」ことは書かないでください。第三者があなたのSNS上の普段の言動もサクラナイツの公式のものと認識し、様々な不都合が発生する可能性があります。どうしても書きたい場合は森井室長の許可を取ってください。
+              <div class="note" style="margin-top:8px;">※業務で撮影した写真を個人のSNSアカウントにアップすることも禁止です。クローズな場での言動でも、スクリーンショットが拡散されるリスクがありますのでご注意ください。</div>
+            </div>
+          </div>
+
+          <div class="rule-card danger">
+            <div class="rule-icon">📸</div>
+            <div>
+              <strong>選手への個人的なお願いは原則禁止</strong>
+              一緒に写真を撮って欲しい、サインが欲しいなどの個人的なお願いは原則禁止です。選手は基本的にこちらからの依頼を「サクラナイツからの依頼」と認識するため、無用なトラブルを招く危険性があります。なにか個人的なお願いがある時は必ず事前に森井室長の許可を取ってください（よっぽどのことがない限りはNGを出すことはないと思います）。
+            </div>
+          </div>
+
+          <div class="rule-card danger">
+            <div class="rule-icon">📱</div>
+            <div>
+              <strong>選手との個人連絡先の交換は原則禁止</strong>
+              必要な場合は事前に森井室長の許可を取ってください。選手から連絡先の交換を持ちかけられた場合も、すぐには応じずに森井室長の許可を取ってからにしてください。
+            </div>
+          </div>
+
+          <div class="rule-card warning">
+            <div class="rule-icon">🤝</div>
+            <div>
+              <strong>同僚への呼称について</strong>
+              同僚をあだ名や愛称で呼ぶことは原則禁止です。弊社ではコンプライアンス的な観点から不適切とされています。原則「苗字＋さん／くん」でお願いします。アルバイト先などではあだ名で呼ぶ文化もあるかと思いますが、弊社では異なりますのでご注意ください。
+            </div>
+          </div>
+
+          <div class="rule-card danger">
+            <div class="rule-icon">🀄</div>
+            <div>
+              <strong>麻雀での金銭賭けは禁止</strong>
+              麻雀で金銭を賭ける行為はMリーグの理念に反するため、いかなる場合においても禁止とします。
+            </div>
+          </div>
+
+        </div>
+
+        <div class="contact-box" style="margin-top: 18px;">
+          <div class="contact-icon">👤</div>
+          <div class="contact-text">
+            <strong>許可が必要な場合の相談窓口</strong>
+            <span>森井室長（Slack or 緊急時は直接連絡）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 具体的な業務 ===== -->
+    <div class="section open" id="tasks">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-blue">📋</div>
+        <div class="section-title-wrap">
+          <div class="section-title">具体的な業務について</div>
+          <div class="section-sub">インターンが担当する業務内容</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+
+        <!-- 試合日業務 -->
+        <div style="margin-bottom:24px;">
+          <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.95rem; font-weight:900; color:var(--kadokawa-blue); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            🏟️ 試合日の控室業務
+          </div>
+          <div class="phase-flow">
+            <div class="phase-step">試合前<br>SNS更新</div>
+            <div class="phase-arrow">→</div>
+            <div class="phase-step">会場入り後<br>控え室準備</div>
+            <div class="phase-arrow">→</div>
+            <div class="phase-step">試合中<br>SNS素材撮影</div>
+            <div class="phase-arrow">→</div>
+            <div class="phase-step">試合後<br>SNS更新・撤収</div>
+          </div>
+          <p class="text-body" style="margin-top:10px;">
+            <a href="https://docs.google.com/spreadsheets/d/17XLGzBkgnn8hgNM8EzJKweJpqQwPrpQlDl4Wz1e-g0k/edit?usp=sharing" target="_blank">こちらに試合日のタスクをまとめています</a>のでこれを参照しながら作業を進めてください。
+          </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 配信業務 -->
+        <div style="margin-bottom:24px;">
+          <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.95rem; font-weight:900; color:var(--kadokawa-blue); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            📡 配信業務
+          </div>
+          <div class="task-grid">
+            <div class="task-card">
+              <div class="task-card-title">📺 オンラインPV</div>
+              <p class="text-body" style="margin-bottom:10px;">月２回ほど、控室にカメラを設置して試合観戦の様子を生放送します。</p>
+              <ul>
+                <li>機材の設置（撤収）</li>
+                <li>配信ディレクション（配信用PCのコントロール、コメント監視など）</li>
+              </ul>
+              <div class="note" style="margin-top:10px;">
+                18:30〜 ファンクラブ・サポーター限定配信<br>
+                18:55〜 オンラインPV本編<br>
+                ※段階的に担当箇所を増やしていく予定です。
+              </div>
+            </div>
+            <div class="task-card">
+              <div class="task-card-title">🎙️ 社内配信</div>
+              <p class="text-body" style="margin-bottom:10px;">月２回ほど、社内（もしくは関連施設）を使用して生放送を配信します。</p>
+              <ul>
+                <li>機材の設置（撤収）</li>
+                <li>配信ディレクション（配信用PCのコントロール、コメント監視など）</li>
+                <li>配信企画の考案 <span class="badge-future">将来的に</span></li>
+                <li>配信事前準備（サムネイル画像の発注・作成、配信予約画面の作成） <span class="badge-future">将来的に</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- その他業務 -->
+        <div>
+          <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.95rem; font-weight:900; color:var(--kadokawa-blue); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            📦 その他の業務
+          </div>
+          <div class="task-grid">
+            <div class="task-card">
+              <div class="task-card-title">📦 発送業務</div>
+              <p class="text-body" style="margin-bottom:10px;">ファンクラブ運営などでプレゼントの発送が毎月数回発生します。下記業務を段階的に担当します。</p>
+              <ul>
+                <li>発送作業（発送物準備〜梱包〜発送手続）</li>
+                <li>名簿印刷</li>
+                <li>名簿作成</li>
+              </ul>
+            </div>
+            <div class="task-card">
+              <div class="task-card-title">📢 SNS発信・整備</div>
+              <p class="text-body" style="margin-bottom:10px;">Twitter/YouTube/ファンクラブ/オフィシャルサポーターサイト/Instagram/TikTok など多様なSNSを運用しています。まずは選手の先発予告からお願いする予定です。</p>
+              <ul>
+                <li><a href="https://twitter.com/kadokawa_sk" target="_blank">Twitter</a>の投稿・管理</li>
+                <li><a href="https://www.youtube.com/channel/UCvKXzjSvPSoYDpG-SLqrkdg" target="_blank">YouTube</a>のコンテンツ整備</li>
+                <li>各SNSのコンテンツ整備</li>
+              </ul>
+              <div class="note" style="margin-top:10px;">
+                ※無理に面白いことは書かなくて良いです。慣れるまでは正確な情報を迅速に届けることを心がけてください。
+              </div>
+            </div>
+            <div class="task-card">
+              <div class="task-card-title">🎉 イベント企画・運営</div>
+              <p class="text-body">社内の各部署と連携しイベントの企画運営を行っています（場合によってはサクラナイツ単体で運営を行うこともあります）。イベントの運営や、企画立案に関わってもらうことがあります。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SNS一覧 -->
+        <hr class="divider">
+        <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.85rem; font-weight:900; color:var(--kadokawa-blue); margin-bottom:8px;">🌐 公式SNSアカウント一覧</div>
+        <div class="sns-grid">
+          <a href="https://twitter.com/kadokawa_sk" target="_blank" class="sns-card sns-twitter">𝕏 Twitter / X</a>
+          <a href="https://www.youtube.com/channel/UCvKXzjSvPSoYDpG-SLqrkdg" target="_blank" class="sns-card sns-youtube">▶ YouTube</a>
+          <a href="https://lounge.dmm.com/detail/2389/index/" target="_blank" class="sns-card sns-fan">🌸 ファンクラブ</a>
+          <a href="https://m-league.jp/teams/sakuraknights" target="_blank" class="sns-card sns-official">🏆 公式サポーター</a>
+          <a href="https://www.instagram.com/kadokawa_sk/" target="_blank" class="sns-card sns-instagram">📷 Instagram</a>
+          <a href="https://www.tiktok.com/@kadokawa_sk" target="_blank" class="sns-card sns-tiktok">🎵 TikTok</a>
+        </div>
+        <div class="note" style="margin-top:10px;">※Instagram、TikTokは現在休止中</div>
+
+      </div>
+    </div>
+
+    <!-- ===== お役立ちリンク集 ===== -->
+    <div class="section open" id="links">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-gold">🔗</div>
+        <div class="section-title-wrap">
+          <div class="section-title">お役立ちリンク集</div>
+          <div class="section-sub">業務で使用する主なサービス</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+        <div class="link-list">
+          <a href="https://wiki.ict.kadokawa.jp/pages/viewpage.action?pageId=75961555" target="_blank" class="link-item">
+            <div class="link-item-icon">🌐</div>
+            <div class="link-item-text">
+              <div class="link-item-title">全社サービスメニュー - 全社サービスポータル - Confluence</div>
+              <div class="link-item-desc">社内サービス一覧はこちら</div>
+            </div>
+            <div class="link-item-arrow">→</div>
+          </a>
+          <a href="https://address.ict.kadokawa.jp/" target="_blank" class="link-item">
+            <div class="link-item-icon">📞</div>
+            <div class="link-item-text">
+              <div class="link-item-title">内線・メールアドレス検索</div>
+              <div class="link-item-desc">社員の連絡先を検索できます</div>
+            </div>
+            <div class="link-item-arrow">→</div>
+          </a>
+          <a href="https://kadokawa.slack.com/archives/C0150TFB1DW/p1698739200502009" target="_blank" class="link-item">
+            <div class="link-item-icon">🤖</div>
+            <div class="link-item-text">
+              <div class="link-item-title">業務サポートAIチャット「Kopilot」</div>
+              <div class="link-item-desc">⭐ 推奨 ｜ 社内問合せはまずこちらをご活用ください</div>
+            </div>
+            <div class="link-item-arrow">→</div>
+          </a>
+          <a href="https://gemini.google.com/app" target="_blank" class="link-item">
+            <div class="link-item-icon">✨</div>
+            <div class="link-item-text">
+              <div class="link-item-title">Gemini</div>
+              <div class="link-item-desc">社内問合せ以外のAI活用：会社用Googleアカウントで使用可能</div>
+            </div>
+            <div class="link-item-arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== コンプライアンスポリシー ===== -->
+    <div class="section open" id="compliance">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon icon-blue">📜</div>
+        <div class="section-title-wrap">
+          <div class="section-title">KADOKAWAグループ コンプライアンスポリシー</div>
+          <div class="section-sub">全スタッフが守るべき行動指針</div>
+        </div>
+        <div class="toggle-arrow">▼</div>
+      </div>
+      <div class="section-body">
+
+        <div class="compliance-intro">
+          KADOKAWAグループは、国や地域を越え、あらゆる人々が豊かに幸せに暮らす持続可能な社会を実現するため、
+          <strong>社会的責任を第一に</strong>、すべての法律とその精神を遵守し、公正かつ自由な競争の許で、
+          様々なステークホルダーとの信頼を築き、適正な企業活動を行うことを重要な使命と認識しております。
+        </div>
+
+        <div class="compliance-items">
+
+          <div class="compliance-item">
+            <div class="compliance-item-header">
+              <div class="compliance-num">1</div>
+              社会の一員としてルールを守った行動をします
+            </div>
+            <div class="compliance-item-body">
+              <ul>
+                <li>法令、社内ルール、社会規範を遵守して、公正な企業活動を行います。</li>
+                <li>事業を展開する国や地域の文化・慣習を理解し、これを尊重して行動します。</li>
+                <li>他人の権利・財産を尊重するとともに、当社の権利・財産の保護に努めます。</li>
+                <li>業務を通じて取得した個人情報や機密情報は、関連する法令を遵守して厳重に管理します。</li>
+                <li>環境問題への配慮や、一人ひとりの社会貢献を通じて社会とともに発展することを目指します。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="compliance-item">
+            <div class="compliance-item-header">
+              <div class="compliance-num">2</div>
+              株主様との密接な対話に努めます
+            </div>
+            <div class="compliance-item-body">
+              <ul>
+                <li>長期的・継続的に企業価値を増大させるべく魅力ある企業作りに努めます。</li>
+                <li>会社経営状況・企業活動全般について正しく理解を得るため、適時・適切・積極的に情報を開示します。</li>
+                <li>インサイダー取引及びその疑いを持たれるような株式取引等を許しません。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="compliance-item">
+            <div class="compliance-item-header">
+              <div class="compliance-num">3</div>
+              お客様が満足するコンテンツやサービスを提供し、企業として信頼の向上に努めます
+            </div>
+            <div class="compliance-item-body">
+              <ul>
+                <li>当社グループのIP創出力とテクノロジーを駆使し、お客様の満足と信頼を得られる、品質の高いコンテンツやサービスを提供します。</li>
+                <li>お客様からの声を誠実に受け止め、コンテンツやサービスの提供に活かしていきます。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="compliance-item">
+            <div class="compliance-item-header">
+              <div class="compliance-num">4</div>
+              取引先との健全な関係を保ちます
+            </div>
+            <div class="compliance-item-body">
+              <ul>
+                <li>当社グループのIP創出に関わる取引先に対し公正、透明、自由な取引を行い、健全で正常な関係を維持し、不当な要求を行わず、贈収賄・腐敗・汚職行為に関与しません。</li>
+                <li>健全な競争を行い、独占禁止法やその他の取引に関する法令を遵守します。</li>
+                <li>暴力団などの反社会的勢力とは取引を行いません。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="compliance-item">
+            <div class="compliance-item-header">
+              <div class="compliance-num">5</div>
+              働く人がクリエイティビティを発揮することのできる職場環境を実現します
+            </div>
+            <div class="compliance-item-body">
+              <ul>
+                <li>個性や多様性を尊重し、働くフィールドとして魅力ある環境を作ります。</li>
+                <li>円滑な意見交換を通じて、適切な意思決定や社内の活性化に努めます。</li>
+                <li>働く人のモチベーションを阻害する各種ハラスメント行為の予防に努めます。</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <strong>KADOKAWAサクラナイツ</strong> Mリーグ運営室 ｜ インターンスタッフマニュアル ｜ ver.2026/02/03<br>
+  作成：Mリーグ運営室 稲垣健
+</footer>
+
+<script>
+  function toggleSection(header) {
+    const section = header.parentElement;
+    section.classList.toggle('open');
+  }
+
+  // サイドバーのアクティブ状態をスクロールに合わせて更新
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+</body>
+</html>

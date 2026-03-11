@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KADOKAWAサクラナイツ｜試合日タスクガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sakura-100: #fff0f3;
+    --sakura-200: #ffd6e0;
+    --sakura-300: #ffb3c6;
+    --sakura-400: #ff8fab;
+    --sakura-500: #e85d8a;
+    --sakura-600: #c9395f;
+    --kadokawa-blue: #003087;
+    --kadokawa-blue-light: #0050b3;
+    --kadokawa-blue-pale: #e8f0fc;
+    --gold: #b8963a;
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-600: #52525b;
+    --gray-800: #27272a;
+    --text: #1a1a2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--gray-50);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--kadokawa-blue) 0%, #001a5c 60%, #0a0a2e 100%);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,48,135,0.4);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-emblem {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .sakura-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(255,143,171,0.7));
+  }
+
+  .header-text h1 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  .header-text p {
+    font-size: 0.7rem;
+    color: var(--sakura-300);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+
+  .header-badge {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* ===== PHASE NAV ===== */
+  .phase-nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--gray-200);
+    position: sticky;
+    top: 80px;
+    z-index: 90;
+    overflow-x: auto;
+  }
+
+  .phase-nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 16px;
+    gap: 0;
+  }
+
+  .phase-btn {
+    flex-shrink: 0;
+    padding: 12px 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--gray-600);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .phase-btn:hover { color: var(--sakura-500); }
+  .phase-btn.active {
+    color: var(--kadokawa-blue);
+    border-bottom-color: var(--sakura-500);
+  }
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ===== PHASE SECTION ===== */
+  .phase-section {
+    margin-bottom: 48px;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+  }
+
+  .phase-pregame .phase-header { background: linear-gradient(135deg, var(--kadokawa-blue-pale), #dce8ff); border-left: 4px solid var(--kadokawa-blue); }
+  .phase-1st .phase-header { background: linear-gradient(135deg, #fff0f3, #ffe4ec); border-left: 4px solid var(--sakura-500); }
+  .phase-between .phase-header { background: linear-gradient(135deg, #f0fff4, #d4f0dc); border-left: 4px solid #22a65a; }
+  .phase-2nd .phase-header { background: linear-gradient(135deg, #fff8e8, #ffecc0); border-left: 4px solid var(--gold); }
+  .phase-after .phase-header { background: linear-gradient(135deg, #f5f0ff, #e8dcff); border-left: 4px solid #7c3aed; }
+
+  .phase-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .phase-title-wrap h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+
+  .phase-subtitle {
+    font-size: 0.72rem;
+    color: var(--gray-600);
+    margin-top: 2px;
+  }
+
+  /* ===== TASK CARDS ===== */
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--gray-200);
+    transition: all 0.2s;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .task-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+  }
+
+  .task-card.done {
+    opacity: 0.55;
+  }
+
+  .task-card.done .task-main {
+    text-decoration: line-through;
+    color: var(--gray-600);
+  }
+
+  .task-card-top {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .task-check-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 14px;
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-200);
+    min-width: 52px;
+  }
+
+  .check-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-200);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .task-card.done .check-circle {
+    background: var(--sakura-500);
+    border-color: var(--sakura-500);
+  }
+
+  .check-icon { display: none; }
+  .task-card.done .check-icon { display: block; color: white; font-size: 0.75rem; }
+
+  .task-body {
+    flex: 1;
+    padding: 14px 16px;
+    min-width: 0;
+  }
+
+  .task-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .task-time {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    background: var(--kadokawa-blue-pale);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .task-assignee {
+    font-size: 0.68rem;
+    color: var(--gray-600);
+    background: var(--gray-100);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .task-assignee.intern {
+    color: var(--sakura-600);
+    background: var(--sakura-100);
+    font-weight: 700;
+  }
+
+  .task-tag {
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .tag-x { background: #000; color: #fff; }
+  .tag-yt { background: #ff0000; color: #fff; }
+  .tag-fc { background: var(--gold); color: #fff; }
+  .tag-slack { background: #4a154b; color: #fff; }
+  .tag-ops { background: var(--kadokawa-blue); color: #fff; }
+  .tag-shoot { background: var(--sakura-500); color: #fff; }
+  .tag-cond { background: #22a65a; color: #fff; }
+
+  .task-main {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .task-expand-btn {
+    background: none;
+    border: none;
+    font-size: 0.72rem;
+    color: var(--kadokawa-blue);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .task-detail {
+    display: none;
+    border-top: 1px solid var(--gray-100);
+    padding: 12px 16px 14px;
+    background: #fafbff;
+  }
+
+  .task-detail.open { display: block; }
+
+  .task-detail p {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .task-detail-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .detail-block {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .detail-block-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .detail-block-content {
+    font-size: 0.8rem;
+    color: var(--gray-800);
+    line-height: 1.65;
+    white-space: pre-wrap;
+  }
+
+  .template-box {
+    background: var(--gray-50);
+    border-left: 3px solid var(--sakura-400);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: var(--gray-800);
+    white-space: pre-wrap;
+    line-height: 1.65;
+    font-family: monospace;
+    overflow-x: auto;
+  }
+
+  .note-box {
+    background: #fffbeb;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    color: #92400e;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .ref-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    color: var(--kadokawa-blue);
+    text-decoration: none;
+    background: var(--kadokawa-blue-pale);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+  .ref-link:hover { background: #ccdaff; }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-divider {
+    text-align: center;
+    padding: 6px 0;
+    font-size: 0.7rem;
+    color: var(--gray-600);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar-wrap {
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 10px 24px;
+    position: sticky;
+    top: 120px;
+    z-index: 80;
+  }
+
+  /* filter bar top = header(80) + phase-nav(42) + progress(38) */
+
+  .progress-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progress-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    white-space: nowrap;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sakura-400), var(--sakura-600));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sakura-600);
+    white-space: nowrap;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .reset-btn {
+    font-size: 0.68rem;
+    background: none;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 3px 8px;
+    cursor: pointer;
+    color: var(--gray-600);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .reset-btn:hover { border-color: var(--sakura-400); color: var(--sakura-600); }
+
+  /* ===== CAUTION CARD ===== */
+  .caution-card {
+    background: linear-gradient(135deg, var(--kadokawa-blue), #001a5c);
+    color: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .caution-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+  .caution-body h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--sakura-300);
+  }
+
+  .caution-body p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.65;
+  }
+
+  .video-guide {
+    background: white;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .video-guide-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sakura-400);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .video-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 6px;
+  }
+
+  .video-type-item {
+    background: var(--gray-50);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .video-code {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--sakura-600);
+    background: var(--sakura-100);
+    padding: 1px 5px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ===== CONDITIONAL TASK ===== */
+  .conditional-badge {
+    font-size: 0.65rem;
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  /* ===== FILTER BAR ===== */
+  .filter-bar-wrap {
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 9px 24px;
+    position: sticky;
+    top: 196px;
+    z-index: 75;
+  }
+
+  .filter-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 2px solid var(--gray-200);
+    background: white;
+    cursor: pointer;
+    font-size: 0.73rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--gray-600);
+    transition: all 0.18s;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .filter-chip input[type="checkbox"] {
+    display: none;
+  }
+
+  .filter-chip .chip-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.18s;
+    opacity: 0.35;
+  }
+
+  .filter-chip.active {
+    border-color: currentColor;
+    background: var(--gray-50);
+  }
+
+  .filter-chip.active .chip-dot {
+    opacity: 1;
+  }
+
+  .filter-chip-intern { color: var(--sakura-600); }
+  .filter-chip-intern.active { background: var(--sakura-100); border-color: var(--sakura-400); }
+  .filter-chip-intern .chip-dot { background: var(--sakura-500); }
+
+  .filter-chip-ops { color: var(--kadokawa-blue); }
+  .filter-chip-ops.active { background: var(--kadokawa-blue-pale); border-color: var(--kadokawa-blue-light); }
+  .filter-chip-ops .chip-dot { background: var(--kadokawa-blue); }
+
+  .filter-chip .chip-check {
+    font-size: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .filter-chip.active .chip-check { opacity: 1; }
+
+  .filter-count-badge {
+    font-size: 0.65rem;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-weight: 700;
+    margin-left: 2px;
+    min-width: 20px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .filter-all-btn {
+    font-size: 0.68rem;
+    background: none;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 3px 9px;
+    cursor: pointer;
+    color: var(--gray-600);
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-left: auto;
+  }
+  .filter-all-btn:hover { border-color: var(--kadokawa-blue); color: var(--kadokawa-blue); }
+
+  /* hidden by filter */
+  .task-card.filter-hidden {
+    display: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    main { padding: 20px 12px 60px; }
+    .header-inner { padding: 12px 16px; }
+    .phase-btn { padding: 10px 14px; font-size: 0.72rem; }
+    .progress-bar-wrap { padding: 8px 16px; top: 108px; }
+    .task-main { font-size: 0.85rem; }
+  }
+
+  /* ===== SAKURA DECO ===== */
+  .sakura-deco {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    font-size: 120px;
+    top: -20px;
+    right: -20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sakura-deco">🌸</div>
+
+<header>
+  <div class="header-inner">
+    <div class="header-emblem">
+      <svg class="sakura-svg" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 C24 4, 28 12, 24 20 C28 16, 36 16, 40 20 C36 20, 30 24, 28 30 C30 26, 36 28, 36 34 C32 30, 26 30, 24 36 C22 30, 16 30, 12 34 C12 28, 18 26, 20 30 C18 24, 12 20, 8 20 C12 16, 20 16, 24 20 C20 12, 24 4, 24 4Z" fill="#ff8fab" opacity="0.9"/>
+        <circle cx="24" cy="24" r="4" fill="#fff" opacity="0.9"/>
+        <circle cx="24" cy="24" r="2" fill="#e85d8a"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>KADOKAWAサクラナイツ</h1>
+      <p>MATCH DAY TASK GUIDE — INTERN EDITION</p>
+    </div>
+    <div class="header-badge">🌸 試合日マニュアル</div>
+  </div>
+</header>
+
+<div class="phase-nav">
+  <div class="phase-nav-inner" id="phaseNav">
+    <button class="phase-btn active" onclick="scrollToPhase('pregame')">🕑 試合前準備</button>
+    <button class="phase-btn" onclick="scrollToPhase('first')">⚔️ 一戦目</button>
+    <button class="phase-btn" onclick="scrollToPhase('between')">🔄 試合間</button>
+    <button class="phase-btn" onclick="scrollToPhase('second')">⚔️ 二戦目</button>
+    <button class="phase-btn" onclick="scrollToPhase('after')">🌸 全試合後</button>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-inner">
+    <span class="progress-label">本日の進捗</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 0</span>
+    <button class="reset-btn" onclick="resetAll()">リセット</button>
+  </div>
+</div>
+
+<div class="filter-bar-wrap">
+  <div class="filter-bar-inner">
+    <span class="filter-label">担当者で絞り込み：</span>
+    <div class="filter-chips">
+      <label class="filter-chip filter-chip-intern active" id="chip-intern">
+        <input type="checkbox" checked onchange="applyFilter()">
+        <span class="chip-dot"></span>
+        🌸 インターン担当
+        <span class="chip-check">✓</span>
+        <span class="filter-count-badge" id="count-intern">-</span>
+      </label>
+      <label class="filter-chip filter-chip-ops active" id="chip-ops">
+        <input type="checkbox" checked onchange="applyFilter()">
+        <span class="chip-dot"></span>
+        📋 運営室メンバー
+        <span class="chip-check">✓</span>
+        <span class="filter-count-badge" id="count-ops">-</span>
+      </label>
+    </div>
+    <button class="filter-all-btn" onclick="resetFilter()">すべて表示</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- 冒頭注意事項 -->
+  <div class="caution-card">
+    <div class="caution-icon">📋</div>
+    <div class="caution-body">
+      <h3>はじめに確認してください</h3>
+      <p>このガイドは時系列順に整理されています。チェックボックスを押すと完了マークがつきます。<br>
+      ★マーク付きタスクは<strong>担当者に確認が必要</strong>なものです。撮影中はなるべくスタッフが画角に映らないよう気をつけてください。</p>
+      <div class="video-guide">
+        <div class="video-guide-title">📹 本日撮影する動画の種類（流れを把握しておいてください）</div>
+        <div class="video-types">
+          <div class="video-type-item"><span class="video-code">A</span>一戦目 出陣（縦・ショート）</div>
+          <div class="video-type-item"><span class="video-code">B</span>一戦目 感想戦（横）</div>
+          <div class="video-type-item"><span class="video-code">C</span>二戦目 出陣（縦・ショート）</div>
+          <div class="video-type-item"><span class="video-code">D</span>二戦目 感想戦（横）</div>
+          <div class="video-type-item"><span class="video-code">E</span>一般公開メッセージ（横）</div>
+          <div class="video-type-item"><span class="video-code">F</span>FC限定メッセージ（横）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== フェーズ0: 試合前 ===== -->
+  <div class="phase-section phase-pregame" id="phase-pregame">
+    <div class="phase-header">
+      <div class="phase-icon">🕑</div>
+      <div class="phase-title-wrap">
+        <h2>試合前の準備</h2>
+        <div class="phase-subtitle">マニュアル確認〜控室設営まで（〜18:45）</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">最優先・事前</span>
+              <span class="task-assignee intern">🌸 インターン担当者</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">📄 マニュアル確認</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">作業内容</div>
+              <div class="detail-block-content">事前にこのマニュアルを確認し、本日行う業務を改めてチェックしてください。
+武藤さん作成のマニュアルに詳細の手順が記載されています。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">12:00〜13:00</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-fc">★ファンクラブ</span>
+            </div>
+            <div class="task-main">【FC】先発告知投稿（テキスト＋選手画像）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿設定</div>
+              <div class="detail-block-content">・サムネイル：Mリーグロゴ
+・投稿カテゴリ：「M.LEAGUE」</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【(今日の日付)】本日の先発は……</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">本文テンプレート</div>
+              <div class="template-box">※こちらの情報は本日14時まではSNSなどへの投稿はご遠慮ください。
+
+本日の先発は (選手名) 選手です！
+皆様🌸桜援🌸よろしくお願いいたします📢
+
+試合は本日19時から🀄
+(試合のURL)
+
+＋選手画像添付</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">FC投稿後〜随時</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-slack">Slack</span>
+            </div>
+            <div class="task-main">【Slack】先発告知（#mリーグ_サクラナイツ応援と雑談ch）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート（FC流用OK）</div>
+              <div class="template-box">本日の先発は (選手名) 選手です！
+皆様🌸桜援🌸よろしくお願いいたします📢
+
+試合は本日19時から🀄
+(試合のURL)
+
+＋選手画像添付</div>
+            </div>
+            <div class="note-box">⚠️ ファンクラブ限定YouTube配信がある場合は、流出厳禁の前提で限定公開リンクなどを記載する</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">14:00</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">条件あり</span>
+            </div>
+            <div class="task-main">【X】先発告知ポスト ※状況に応じて3パターン</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">パターン①：配信なしの場合</div>
+              <div class="template-box">🌸#Mリーグ2025-26 本日の先発🌸
+本日の第1試合に出場するのは #(選手名) 選手！
+(最近の試合の流れや本日の登板への期待など)
+皆様、応援よろしくお願いします🌸
+
+試合は本日19時から🀄
+(試合のURL)
+
+＋選手画像添付</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">パターン②：オンラインPVあり</div>
+              <div class="template-box">🌸#Mリーグ2025-26 本日の先発🌸
+本日の第1試合に出場するのは #(選手名) 選手！
+(コメント)
+
+そして本日は18:55〜オンラインPVも配信します！
+(オンラインPV URL)
+ぜひ控室の選手と一緒にサクラナイツを桜援してください🌸
+
+試合は本日19時から🀄
+(試合のURL)</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">パターン③：FC限定PVあり</div>
+              <div class="template-box">🌸#Mリーグ2025-26 本日の先発🌸
+本日の第1試合に出場するのは #(選手名) 選手！
+(コメント)
+
+そして本日は18:50〜ファンクラブ会員限定のPVも配信します！
+(FC限定PVのURLが載った記事のURL)
+一回戦開始までどなたでもご覧になれます✨
+
+試合は本日19時から🀄
+(試合のURL)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">14:00〜14:30</span>
+              <span class="task-assignee">黒滝</span>
+              <span class="task-tag tag-fc">★ファンクラブ</span>
+            </div>
+            <div class="task-main">【FC】先発告知（黒滝担当）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿設定</div>
+              <div class="detail-block-content">・サムネイル：出場選手画像
+・投稿カテゴリ：「M.LEAGUE」</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【(今日の日付)】本日の先発は〇〇選手！</div>
+            </div>
+            <div class="note-box">本文はX投稿の流用でOK</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">14:01〜</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">オンラインPV日のみ</span>
+            </div>
+            <div class="task-main">【X】オンラインPV URL投稿（FC・サポーター向け配信URL）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">本日【(日付)(時刻)〜】
+「ファンクラブ／オフィシャルサポーター」会員限定の生放送を配信！
+リベンジに燃える〇〇選手をはじめ、サクラナイツの選手たちにぜひ激励を✨
+
+🔽視聴URLについてはこちら🔽
+■ファンクラブ (URL)
+■サポーター (URL)</div>
+            </div>
+            <div class="note-box">⚠️ ファンクラブ動画リンクはYoutubeの限定公開リンクのURLを貼らないように注意！</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">〜18:30</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【スタジオ】控室設営</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">設営チェックリスト</div>
+              <div class="detail-block-content">📦 倉庫：Mリーグスタジオ入り口左の倉庫
+
+□ のれんを入り口に設置
+□ スポンサーロールパネルを設置
+□ サクラブレードBLOOM 5本の用意（電源確認も行う）
+□ 対戦表・ポイント・席順などを壁に記載
+□ オンラインPV等開催時にはキャリーケースも移動</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">〜18:45</span>
+              <span class="task-assignee">該当日のみ</span>
+              <span class="task-tag tag-shoot">撮影</span>
+              <span class="conditional-badge">必要時のみ</span>
+            </div>
+            <div class="task-main">【撮影】コラム動画撮影（必要な場合のみ）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">手順</div>
+              <div class="detail-block-content">① コラム動画を撮影
+② YouTubeに限定公開設定でアップ</div>
+            </div>
+            <a class="ref-link" href="https://youtu.be/JUqijHgKt4E" target="_blank">🔗 参考動画</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">〜18:45</span>
+              <span class="task-assignee">該当日のみ</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">オンラインPV日のみ</span>
+            </div>
+            <div class="task-main">【X】BW差し入れ弁当投稿（選手弁当写真）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">手順</div>
+              <div class="detail-block-content">① 弁当を持った選手の写真を撮影
+② Xに下記テンプレートで投稿</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">本日はオンラインPVデーということで、今シーズンも #BOOKWALKER さま（@BOOK_WALKER）から豪華弁当の差し入れをいただきました！
+どうもありがとうございます🌸
+
+お弁当詳細はぜひオンラインPVでご確認ください🍱
+(オンラインPVのURL)</div>
+            </div>
+            <a class="ref-link" href="https://x.com/kadokawa_sk/status/1967879182882603374" target="_blank">🔗 参考投稿</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== フェーズ1: 一戦目 ===== -->
+  <div class="phase-section phase-1st" id="phase-first">
+    <div class="phase-header">
+      <div class="phase-icon">⚔️</div>
+      <div class="phase-title-wrap">
+        <h2>一戦目（19:00〜）</h2>
+        <div class="phase-subtitle">出陣〜試合中〜感想戦まで</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="section-divider">試合直前</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">出陣直前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【リモコン】音量を下げる（動画撮影のため）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">19:00 第1試合前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 A</span>
+            </div>
+            <div class="task-main">【撮影】一戦目 出陣動画《A》を縦で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📱 画面は「縦」で撮影してください（ショート動画用）</div>
+        </div>
+      </div>
+
+      <div class="section-divider">試合開始後すぐ</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">19:00〜19:10</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-x">X</span>
+            </div>
+            <div class="task-main">【X】一戦目 出陣ポスト（動画《A》添付）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">投稿テンプレート</div>
+            <div class="template-box">(選手名)出陣です！　行ってらっしゃいませ🌸
+
+＋《A：一戦目出陣動画》添付</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">19:00〜19:10</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】一戦目 出陣動画《A´》をショート設定で公開投稿</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【#Mリーグ2025-26】(日付) 一戦目 #(選手名) 選手 出陣 #shorts</div>
+            </div>
+            <div class="note-box">⚠️ 「ショート動画」設定で投稿／公開設定でアップ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">試合中</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合中（随時）</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">和了した時</span>
+            </div>
+            <div class="task-main">【X】選手が和了した時の控え室動画を投稿</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">撮影のポイント</div>
+              <div class="detail-block-content">・和了する前の5〜10秒前から撮影開始
+・終わった後、しゃべるのを止めるまで撮影
+・15〜30秒くらいの尺で投稿（役満・大逆転は長めでもOK）</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">#(選手名) 選手
+(まずは満ツモで好スタート🌸など和了や状況を説明)</div>
+            </div>
+            <a class="ref-link" href="https://x.com/kadokawa_sk/status/1904513041204744675" target="_blank">🔗 参考投稿</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">第1試合終了時</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了時</span>
+              <span class="task-assignee">森井</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+              <span class="conditional-badge">1位の時のみ</span>
+            </div>
+            <div class="task-main">【ブレード】サクラブレードを勝利選手に届ける</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">⚠️ 森井さんがいない場合・1試合目に勝利した場合のみ
+【控室→対局室】控室を出て右側のらせん階段からスタジオに移動（スタジオからの指示で右側から）
+→ スタジオが変わったので要確認</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== フェーズ2: 試合間 ===== -->
+  <div class="phase-section phase-between" id="phase-between">
+    <div class="phase-header">
+      <div class="phase-icon">🔄</div>
+      <div class="phase-title-wrap">
+        <h2>第1試合終了後〜第2試合前</h2>
+        <div class="phase-subtitle">感想戦撮影・各種投稿（スピード重視！）</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【リモコン】音量を下げる（感想戦撮影のため）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 B</span>
+            </div>
+            <div class="task-main">【撮影】一戦目 感想戦動画《B》を横で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📹 画面は「横」で撮影してください
+撮影中に「一般向けにどのシーンが適切か」見当をつけておく
+→ 一般向けはファンクラブの半分〜2/3の長さがベスト（できれば1分超えるくらい）</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【リモコン】音量を戻す</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee">稲垣／木部</span>
+              <span class="task-tag tag-fc">★ファンクラブ</span>
+            </div>
+            <div class="task-main">【FC】先発コメント欄に一戦目感想戦URLを貼付</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">コメント内容</div>
+              <div class="template-box">(YouTubeの《B：一戦目の感想戦動画》のURL）
+
+(1戦目選手名)選手お疲れ様でした！
+次戦は(2戦目選手名)選手が出場します。
+引き続き応援よろしくお願いします🌸</div>
+            </div>
+            <div class="note-box">「オンラインサロン」アプリから確認して投稿</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-x">X</span>
+            </div>
+            <div class="task-main">【X】一戦目感想戦ポスト（動画冒頭15秒前後＋次戦先発告知）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">(1戦目選手名)選手お疲れ様でした！
+(できれば対局を振り返り〜でしたね)
+次戦は(2戦目選手名)選手が出場します。
+引き続き応援よろしくお願いします🌸
+
+＋《B：一戦目感想戦動画》の冒頭15秒前後</div>
+            </div>
+            <div class="note-box">⚡ スピード重視！キリのいいところがベストですが、ぶつ切りでもOKです</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】一般用一戦目感想戦《B´》を限定公開でアップ（半分〜2/3に編集済みのもの）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【#Mリーグ2025-26】(年)/(月)/(日) 一戦目 #(選手名) 感想戦</div>
+            </div>
+            <div class="note-box">⚠️ 事前に元動画の「半分〜2/3」の長さに編集しておくこと
+いったん「限定公開」設定でアップ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】FC用一戦目感想戦《B》をフル尺で限定公開アップ</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">タイトル</div>
+            <div class="template-box">【ファンクラブ限定】(年)/(月)/(日) 一戦目試合後控え室</div>
+          </div>
+          <div class="note-box">「限定公開」設定でアップ</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第1試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube Studio】一戦目感想戦《B´》を公開設定に変更＋収益化オン</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">手順</div>
+              <div class="detail-block-content">① YouTube Studioにアクセス
+② 《B´：一般公開用一戦目の感想戦動画》を「公開」設定に変更
+③ 収益化をオンにする（収益化ポリシー：Monetize in all countries）</div>
+            </div>
+            <div class="note-box">⚠️ 1戦目終了〜2戦目開始までは短いので、場合によっては出陣動画を優先し感想戦は後回しでもOK</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== フェーズ3: 二戦目 ===== -->
+  <div class="phase-section phase-2nd" id="phase-second">
+    <div class="phase-header">
+      <div class="phase-icon">⚔️</div>
+      <div class="phase-title-wrap">
+        <h2>二戦目</h2>
+        <div class="phase-subtitle">出陣〜試合中〜感想戦まで</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="section-divider">出陣直前</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">出陣直前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【リモコン】音量を下げる（動画撮影のため）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 C</span>
+            </div>
+            <div class="task-main">【撮影】二戦目 出陣動画《C》を縦で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📱 画面は「縦」で撮影してください（ショート動画用）</div>
+        </div>
+      </div>
+
+      <div class="section-divider">出陣後すぐ</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-x">X</span>
+            </div>
+            <div class="task-main">【X】二戦目 出陣ポスト（動画《C》添付）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">投稿テンプレート</div>
+            <div class="template-box">(選手名)出陣です！　行ってらっしゃいませ🌸
+
+＋《C：二戦目出陣動画》添付</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合前</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】二戦目 出陣動画《C´》をショート設定で公開投稿</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【#Mリーグ2025-26】(年)/(月)/(日) 二戦目 #(選手名) 選手 出陣</div>
+            </div>
+            <div class="note-box">「ショート動画」設定で投稿／公開設定</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">試合中</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合中（随時）</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">和了した時</span>
+            </div>
+            <div class="task-main">【X】選手が和了した時の控え室動画を投稿</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">一戦目と同様。15〜30秒の尺で投稿（役満・大逆転は長めでもOK）</div>
+          <a class="ref-link" href="https://x.com/kadokawa_sk/status/1904513041204744675" target="_blank">🔗 参考投稿</a>
+        </div>
+      </div>
+
+      <div class="section-divider">第2試合終了時</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合後</span>
+              <span class="task-assignee">森井</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+              <span class="conditional-badge">1位の時のみ</span>
+            </div>
+            <div class="task-main">【ブレード】サクラブレードを勝利選手に届ける</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">⚠️ 2試合目の場合は「左側のらせん階段」から移動！
+（右側の階段を降りると1戦目の出場選手とぶつかる可能性があります）
+→ スタジオが変わったので要確認</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【リモコン】音量を下げる（感想戦撮影のため）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">第2試合後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 D</span>
+            </div>
+            <div class="task-main">【撮影】二戦目 感想戦動画《D》を横で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📹 画面は「横」で撮影してください</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== フェーズ4: 全試合後 ===== -->
+  <div class="phase-section phase-after" id="phase-after">
+    <div class="phase-header">
+      <div class="phase-icon">🌸</div>
+      <div class="phase-title-wrap">
+        <h2>全試合終了後</h2>
+        <div class="phase-subtitle">メッセージ撮影・各種投稿・撤収まで</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 E</span>
+            </div>
+            <div class="task-main">【撮影】一般公開用メッセージ動画《E》を横で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📹 横で撮影　「3、2、1」とカウントダウンしてから撮影開始</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-shoot">撮影 F</span>
+            </div>
+            <div class="task-main">【撮影】FC用メッセージ動画《F》を横で撮影</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">📹 横で撮影　「3、2、1」とカウントダウンしてから撮影開始</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">稲垣 or 木部 or インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【スポンサー】TシャツへのサインをBW用に選手からもらう</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">手順</div>
+              <div class="detail-block-content">① 本日出場した選手の試合の一言感想＋サインをもらう
+　（1試合目の選手は日付も書いてもらう）
+② 2試合分のサインをもらったら「選手がTシャツを持っている写真」を撮影
+③ 稲垣さん宛にSlackで送信</div>
+            </div>
+            <div class="note-box">1試合目の選手については、このタイミングより前でもOKです</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】二戦目一般用感想戦《D´》を限定公開でアップ</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【#Mリーグ2025-26】(年)/(月)/(日) 二戦目 #(選手名) 選手 感想戦</div>
+            </div>
+            <div class="note-box">⚠️ 事前に「半分〜2/3」の長さに編集しておくこと
+いったん「限定公開」設定でアップ
+試合が遅く終わった場合（23時前後）はのれん・バックパネルの撤収を優先！</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】FC用二戦目感想戦《D》を限定公開でアップ</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">タイトル</div>
+            <div class="template-box">【ファンクラブ限定】(年)/(月)/(日) 二戦目試合後控え室</div>
+          </div>
+          <div class="note-box">「限定公開」設定でアップ</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】一般公開用メッセージ動画《E》を限定公開でアップ</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">タイトル</div>
+            <div class="template-box">【#Mリーグ2025-26】(年)/(月)/(日) 試合後メッセージ</div>
+          </div>
+          <div class="note-box">いったん「限定公開」設定でアップ</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube】FC用メッセージ動画《F》を限定公開でアップ</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">タイトル</div>
+            <div class="template-box">（年）/（月）/（日）ファンクラブ限定メッセージ</div>
+          </div>
+          <div class="note-box">「限定公開」設定でアップ</div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee intern">🌸 インターン</span>
+              <span class="task-tag tag-ops">オペレーション</span>
+            </div>
+            <div class="task-main">【撤収】のれん・ロールパネル・サクラブレードなどを倉庫に戻す</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">⚠️ 試合が遅く終わった場合（23時前後）はこちらを最優先で実施してください</div>
+        </div>
+      </div>
+
+      <div class="section-divider">運営メンバー作業（参考）</div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-fc">★ファンクラブ</span>
+            </div>
+            <div class="task-main">【FC】1日の締め投稿（新規投稿）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">タイトル</div>
+              <div class="template-box">【(日付)】本日も桜援（or 応援）ありがとうございました</div>
+            </div>
+            <div class="detail-block">
+              <div class="detail-block-label">本文テンプレート</div>
+              <div class="template-box">■試合後メッセージ
+（《E：一般公開用メッセージ動画》YouTubeのURL）
+ 
+■ファンクラブ限定メッセージ
+（《F：ファンクラブ用メッセージ動画》YouTubeのURL）
+ 
+■一試合目感想戦（ロングバージョン）
+（《B：一戦目の感想戦動画》YouTubeのURL）
+ 
+■二試合目感想戦（ロングバージョン）
+（《D：二戦目の感想戦動画》YouTubeのURL）
+ 
+本日も桜援ありがとうございました！
+
+（今日の感想）
+ 
+次回の試合は〇月〇日(〇)です。よろしくお願いします🌸
+
+（締めの一言）</div>
+            </div>
+            <div class="note-box">コメントの目安：1+2戦目着順合計で
+「2」→最高の / 「3〜4」→とても良い / 「5〜6」→健闘の
+「7〜8」→惜しい / 「8」→不運な</div>
+          </div>
+          <a class="ref-link" href="https://sakuraknights.com/articles/mleague/ar9XtM6aXkxFjAF7Gcu85EPf" target="_blank">🔗 参考記事</a>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-yt">YouTube</span>
+            </div>
+            <div class="task-main">【YouTube Studio】二戦目〜試合後各種動画の収益化オン＋公開設定変更</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="detail-block">
+            <div class="detail-block-label">手順</div>
+            <div class="detail-block-content">① YouTube Studioで各動画の収益化をオン（Monetize in all countries）
+② 《D´》《E》を「公開」設定に変更</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-x">X</span>
+            </div>
+            <div class="task-main">【X】本日の締めポスト</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">本日も桜援ありがとうございました！ 
+（振り返りテキスト）
+次戦は(次戦日付)です。引き続き桜援よろしくお願いします🌸   
+
+🔽選手からのメッセージはこちら🔽
+(一般公開用メッセージ動画URL)</div>
+            </div>
+          </div>
+          <a class="ref-link" href="https://x.com/kadokawa_sk/status/1876280207344300530" target="_blank">🔗 参考投稿</a>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-x">X</span>
+            </div>
+            <div class="task-main">【X】試合後感想戦などの動画まとめ告知</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">本日のPVアーカイブや試合後感想戦動画はこちら🀄
+
+●オンラインPVアーカイブ（動画URL）
+●１戦目 #選手名 感想戦（動画URL）
+●２戦目 #選手名 感想戦（動画URL）</div>
+            </div>
+            <div class="note-box">オンラインPVがある日はオンラインPVのURLも貼る</div>
+          </div>
+          <a class="ref-link" href="https://x.com/kadokawa_sk/status/1876280789459227030" target="_blank">🔗 参考投稿</a>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">黒滝/小橋/長井</span>
+              <span class="task-tag tag-x">X</span>
+              <span class="conditional-badge">適宜（間隔をあけて）</span>
+            </div>
+            <div class="task-main">【X】ファンクラブ告知ポスト</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="task-detail-grid">
+            <div class="detail-block">
+              <div class="detail-block-label">投稿テンプレート</div>
+              <div class="template-box">サクラナイツファンクラブでは毎試合ごとに感想戦のロングverや限定メッセージ動画などのコンテンツを配信！
+
+（今日のファンクラブ動画のトピックがあれば記載）
+
+🔽本日のファンクラブ記事はこちら🔽
+（ファンクラブ記事のURL）</div>
+            </div>
+            <div class="note-box">⚠️ 毎回発信すると効果がなくなるので適度に間隔をあけて投稿</div>
+          </div>
+          <a class="ref-link" href="https://x.com/kadokawa_sk/status/1967958786322399361" target="_blank">🔗 参考投稿</a>
+        </div>
+      </div>
+
+      <div class="task-card" onclick="toggleTask(this)">
+        <div class="task-card-top">
+          <div class="task-check-col">
+            <div class="check-circle"><span class="check-icon">✓</span></div>
+          </div>
+          <div class="task-body">
+            <div class="task-meta">
+              <span class="task-time">全試合終了後</span>
+              <span class="task-assignee">運営室メンバー</span>
+              <span class="task-tag tag-slack">Slack</span>
+            </div>
+            <div class="task-main">【Slack】1日の締め投稿（#mリーグ_サクラナイツ応援と雑談ch）</div>
+            <button class="task-expand-btn" onclick="toggleDetail(event, this)">▶ 詳細を見る</button>
+          </div>
+        </div>
+        <div class="task-detail">
+          <div class="note-box">FC用の「1日の締め投稿」と同じ文章でOK
+チームPVに関する内容など内容がそぐわない部分があれば調整してください</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+  let totalTasks = 0;
+  let doneTasks = 0;
+
+  // ===== FILTER =====
+  function getAssigneeType(card) {
+    const assigneeEl = card.querySelector('.task-assignee');
+    if (!assigneeEl) return 'other';
+    const text = assigneeEl.textContent;
+    if (assigneeEl.classList.contains('intern')) return 'intern';
+    if (text.includes('運営室')) return 'ops';
+    return 'other';
+  }
+
+  function applyFilter() {
+    const chips = document.querySelectorAll('.filter-chip');
+    const internChecked = document.querySelector('#chip-intern input').checked;
+    const opsChecked    = document.querySelector('#chip-ops input').checked;
+
+    // toggle active style
+    document.getElementById('chip-intern').classList.toggle('active', internChecked);
+    document.getElementById('chip-ops').classList.toggle('active', opsChecked);
+
+    const cards = document.querySelectorAll('.task-card');
+    cards.forEach(card => {
+      const type = getAssigneeType(card);
+      let show = false;
+      if (type === 'intern' && internChecked) show = true;
+      if (type === 'ops'    && opsChecked)    show = true;
+      if (type === 'other') show = (internChecked || opsChecked); // show "other" if any filter is on
+      card.classList.toggle('filter-hidden', !show);
+    });
+
+    updateProgress();
+  }
+
+  function resetFilter() {
+    document.querySelector('#chip-intern input').checked = true;
+    document.querySelector('#chip-ops input').checked = true;
+    document.getElementById('chip-intern').classList.add('active');
+    document.getElementById('chip-ops').classList.add('active');
+    document.querySelectorAll('.task-card').forEach(c => c.classList.remove('filter-hidden'));
+    updateProgress();
+  }
+
+  function initFilterCounts() {
+    let internCount = 0, opsCount = 0;
+    document.querySelectorAll('.task-card').forEach(card => {
+      const t = getAssigneeType(card);
+      if (t === 'intern') internCount++;
+      else if (t === 'ops') opsCount++;
+    });
+    document.getElementById('count-intern').textContent = internCount;
+    document.getElementById('count-ops').textContent = opsCount;
+  }
+
+  // ===== PROGRESS =====
+  function countTasks() {
+    const cards = document.querySelectorAll('.task-card:not(.filter-hidden)');
+    totalTasks = cards.length;
+    doneTasks = document.querySelectorAll('.task-card.done:not(.filter-hidden)').length;
+    updateProgress();
+  }
+
+  function toggleTask(card) {
+    if (event.target.tagName === 'BUTTON' || event.target.tagName === 'A') return;
+    if (card.classList.contains('filter-hidden')) return;
+    card.classList.toggle('done');
+    doneTasks = document.querySelectorAll('.task-card.done:not(.filter-hidden)').length;
+    updateProgress();
+  }
+
+  function toggleDetail(e, btn) {
+    e.stopPropagation();
+    const detail = btn.closest('.task-body').nextElementSibling;
+    if (!detail) return;
+    if (!detail.classList.contains('task-detail')) return;
+    detail.classList.toggle('open');
+    btn.textContent = detail.classList.contains('open') ? '▼ 閉じる' : '▶ 詳細を見る';
+  }
+
+  function updateProgress() {
+    const visibleCards = document.querySelectorAll('.task-card:not(.filter-hidden)');
+    totalTasks = visibleCards.length;
+    doneTasks = document.querySelectorAll('.task-card.done:not(.filter-hidden)').length;
+    const pct = totalTasks > 0 ? (doneTasks / totalTasks * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = doneTasks + ' / ' + totalTasks + ' 完了';
+  }
+
+  function resetAll() {
+    if (!confirm('進捗をリセットしますか？')) return;
+    document.querySelectorAll('.task-card.done').forEach(c => c.classList.remove('done'));
+    doneTasks = 0;
+    updateProgress();
+  }
+
+  function scrollToPhase(phase) {
+    const ids = {
+      'pregame': 'phase-pregame',
+      'first': 'phase-first',
+      'between': 'phase-between',
+      'second': 'phase-second',
+      'after': 'phase-after'
+    };
+    const el = document.getElementById(ids[phase]);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.querySelectorAll('.phase-btn').forEach((b, i) => {
+      const phaseKeys = ['pregame','first','between','second','after'];
+      b.classList.toggle('active', phaseKeys[i] === phase);
+    });
+  }
+
+  // Highlight active phase on scroll
+  const sections = [
+    { id: 'phase-pregame', key: 'pregame' },
+    { id: 'phase-first', key: 'first' },
+    { id: 'phase-between', key: 'between' },
+    { id: 'phase-second', key: 'second' },
+    { id: 'phase-after', key: 'after' }
+  ];
+
+  const phaseKeys = ['pregame','first','between','second','after'];
+
+  window.addEventListener('scroll', () => {
+    let current = 'pregame';
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el && window.scrollY >= el.offsetTop - 180) current = s.key;
+    });
+    document.querySelectorAll('.phase-btn').forEach((b, i) => {
+      b.classList.toggle('active', phaseKeys[i] === current);
+    });
+  });
+
+  initFilterCounts();
+  updateProgress();
+
+</script>
+</body>
+</html>

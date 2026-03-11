@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KADOKAWAサクラナイツ｜先発発表投稿マニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sakura-100: #fff0f3;
+    --sakura-200: #ffd6e0;
+    --sakura-300: #ffb3c6;
+    --sakura-400: #ff8fab;
+    --sakura-500: #e85d8a;
+    --sakura-600: #c9395f;
+    --kadokawa-blue: #003087;
+    --kadokawa-blue-light: #0050b3;
+    --kadokawa-blue-pale: #e8f0fc;
+    --gold: #b8963a;
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-600: #52525b;
+    --gray-800: #27272a;
+    --text: #1a1a2e;
+    --success: #16a34a;
+    --success-pale: #f0fdf4;
+    --warning: #d97706;
+    --warning-pale: #fffbeb;
+    --danger: #dc2626;
+    --danger-pale: #fef2f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--gray-50);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--kadokawa-blue) 0%, #001a5c 60%, #0a0a2e 100%);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,48,135,0.4);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-emblem { width: 48px; height: 48px; flex-shrink: 0; }
+  .sakura-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px rgba(255,143,171,0.7)); }
+
+  .header-text h1 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .header-text p { font-size: 0.7rem; color: var(--sakura-300); letter-spacing: 0.12em; margin-top: 2px; }
+
+  .header-badge {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* ===== MAIN ===== */
+  main { max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ===== INTRO ===== */
+  .intro-card {
+    background: linear-gradient(135deg, var(--kadokawa-blue-pale), #fff0f5);
+    border: 1px solid var(--sakura-200);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .intro-card h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .intro-card p { font-size: 0.85rem; line-height: 1.8; color: var(--gray-600); }
+  .intro-card strong { color: var(--sakura-600); }
+
+  /* ===== WIZARD ===== */
+  .wizard-section {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--gray-200);
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0,48,135,0.06);
+  }
+
+  .wizard-title {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--kadokawa-blue);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sakura-200);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .condition-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) { .condition-grid { grid-template-columns: 1fr; } }
+
+  .condition-group label.group-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--kadokawa-blue);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .cond-btn {
+    padding: 7px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    background: white;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .cond-btn:hover { border-color: var(--sakura-400); color: var(--sakura-600); }
+  .cond-btn.selected {
+    border-color: var(--kadokawa-blue);
+    background: var(--kadokawa-blue);
+    color: white;
+  }
+  .cond-btn.selected.sakura-sel {
+    border-color: var(--sakura-500);
+    background: var(--sakura-500);
+  }
+
+  .generate-btn {
+    margin-top: 22px;
+    width: 100%;
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 900;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--kadokawa-blue), #0050b3);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(0,48,135,0.3);
+  }
+  .generate-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,48,135,0.4); }
+  .generate-btn:disabled { background: var(--gray-200); color: var(--gray-600); box-shadow: none; transform: none; cursor: not-allowed; }
+
+  /* ===== RESULT ===== */
+  #result { display: none; }
+  #result.visible { display: block; }
+
+  .result-header {
+    background: linear-gradient(135deg, var(--sakura-500), var(--sakura-600));
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .result-header h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+  .result-header p { font-size: 0.72rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
+
+  /* Task Step */
+  .phase-block { margin-bottom: 32px; }
+
+  .phase-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+  }
+  .phase-label.prep { background: var(--kadokawa-blue-pale); border-left: 4px solid var(--kadokawa-blue); }
+  .phase-label.fc { background: #fff0f3; border-left: 4px solid var(--sakura-500); }
+  .phase-label.x { background: #f0f7ff; border-left: 4px solid #1d9bf0; }
+  .phase-label.slack-app { background: #f5f0ff; border-left: 4px solid #611f69; }
+  .phase-label.report { background: #f0fff4; border-left: 4px solid #16a34a; }
+  .phase-label.pv { background: #fff8e8; border-left: 4px solid var(--gold); }
+
+  .phase-icon { font-size: 1.5rem; }
+  .phase-label-text h3 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .phase-label-text span { font-size: 0.7rem; color: var(--gray-600); }
+
+  .step-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .step-item {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--kadokawa-blue);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-num.sakura { background: var(--sakura-500); }
+  .step-num.blue-twitter { background: #1d9bf0; }
+  .step-num.purple { background: #611f69; }
+  .step-num.green { background: #16a34a; }
+  .step-num.gold { background: var(--gold); }
+
+  .step-content { flex: 1; }
+  .step-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .step-desc { font-size: 0.78rem; line-height: 1.7; color: var(--gray-600); }
+
+  /* Alert boxes */
+  .alert {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.76rem;
+    line-height: 1.7;
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-warn { background: var(--warning-pale); border: 1px solid #fde68a; color: #78350f; }
+  .alert-danger { background: var(--danger-pale); border: 1px solid #fecaca; color: #7f1d1d; }
+  .alert-info { background: var(--kadokawa-blue-pale); border: 1px solid #bfdbfe; color: #1e3a5f; }
+  .alert-success { background: var(--success-pale); border: 1px solid #bbf7d0; color: #14532d; }
+  .alert-pink { background: #fff0f3; border: 1px solid var(--sakura-200); color: #7f1d3a; }
+
+  /* Example box */
+  .example-box {
+    background: var(--gray-100);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    margin-top: 8px;
+    color: var(--gray-800);
+    border-left: 3px solid var(--sakura-400);
+    white-space: pre-wrap;
+  }
+
+  /* Player tag */
+  .player-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: var(--sakura-100);
+    color: var(--sakura-600);
+    margin: 2px;
+  }
+
+  /* Settings summary */
+  .settings-summary {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .settings-tag {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    background: var(--kadokawa-blue);
+    color: white;
+  }
+  .settings-tag.pink { background: var(--sakura-500); }
+  .settings-tag.gold { background: var(--gold); }
+
+  /* Checklist */
+  .checklist { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+  }
+  .check-item:hover { background: var(--gray-100); border-color: var(--gray-200); }
+  .check-item input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: var(--sakura-500); width: 15px; height: 15px; cursor: pointer; }
+  .check-item.checked { text-decoration: line-through; opacity: 0.5; }
+
+  /* url display */
+  .url-display {
+    font-size: 0.72rem;
+    color: var(--kadokawa-blue-light);
+    word-break: break-all;
+    margin-top: 4px;
+  }
+
+  /* Emoji examples */
+  .emoji-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .emoji-pill {
+    background: var(--sakura-100);
+    border: 1px solid var(--sakura-200);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.85rem;
+  }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px dashed var(--gray-200); margin: 16px 0; }
+
+  /* Reset btn */
+  .reset-btn {
+    margin-top: 32px;
+    padding: 10px 24px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: white;
+    color: var(--gray-600);
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .reset-btn:hover { border-color: var(--sakura-400); color: var(--sakura-600); }
+
+  /* condition full width */
+  .condition-full { grid-column: 1 / -1; }
+
+  /* Nickname box */
+  .nickname-card {
+    background: linear-gradient(135deg, #fff0f3, #fffbeb);
+    border: 1px solid var(--sakura-200);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 8px;
+  }
+  .nickname-card .nn-name { font-size: 0.82rem; font-weight: 700; color: var(--sakura-600); margin-bottom: 4px; }
+  .nickname-card .nn-nick { font-size: 0.78rem; color: var(--gray-600); }
+  .nickname-card .nn-example { font-size: 0.76rem; line-height: 1.7; color: var(--gray-800); margin-top: 6px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-emblem">
+      <svg class="sakura-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="5" fill="#ff8fab"/>
+        <ellipse cx="24" cy="12" rx="5" ry="9" fill="#ffb3c6" transform="rotate(0 24 24)"/>
+        <ellipse cx="24" cy="12" rx="5" ry="9" fill="#ff8fab" transform="rotate(72 24 24)"/>
+        <ellipse cx="24" cy="12" rx="5" ry="9" fill="#ffb3c6" transform="rotate(144 24 24)"/>
+        <ellipse cx="24" cy="12" rx="5" ry="9" fill="#ff8fab" transform="rotate(216 24 24)"/>
+        <ellipse cx="24" cy="12" rx="5" ry="9" fill="#ffb3c6" transform="rotate(288 24 24)"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>KADOKAWAサクラナイツ</h1>
+      <p>INTERN TASK GUIDE — 先発発表投稿マニュアル</p>
+    </div>
+    <div class="header-badge">📋 投稿マニュアル</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <h2>🌸 はじめに</h2>
+    <p>
+      先発予告はとても大事なお仕事です。ファンの方は先発情報を見て試合のことを考え、選手もリポストして出場の決意表明をします。<br>
+      SNSの盛り上がりの<strong>中心となる情報</strong>を、自覚を持って発信してください。<br><br>
+      ※ 無理して面白いことを書こうとしなくて大丈夫です。状況に合わせた誠実な投稿を心がけましょう。
+    </p>
+  </div>
+
+  <!-- WIZARD -->
+  <div class="wizard-section">
+    <div class="wizard-title">
+      ⚙️ まず試合の条件を選択してください
+    </div>
+
+    <div class="condition-grid">
+
+      <!-- 曜日 -->
+      <div class="condition-group">
+        <label class="group-label">📅 試合の曜日</label>
+        <div class="btn-group" id="grp-day">
+          <button class="cond-btn" data-group="day" data-val="mon">月</button>
+          <button class="cond-btn" data-group="day" data-val="tue">火</button>
+          <button class="cond-btn" data-group="day" data-val="wed">水</button>
+          <button class="cond-btn" data-group="day" data-val="thu">木</button>
+          <button class="cond-btn" data-group="day" data-val="fri">金</button>
+          <button class="cond-btn" data-group="day" data-val="other">その他</button>
+        </div>
+      </div>
+
+      <!-- 先発選手 -->
+      <div class="condition-group">
+        <label class="group-label">🀄 先発選手</label>
+        <div class="btn-group" id="grp-player">
+          <button class="cond-btn sakura-sel" data-group="player" data-val="okada">岡田紗佳</button>
+          <button class="cond-btn sakura-sel" data-group="player" data-val="hori">堀慎吾</button>
+          <button class="cond-btn sakura-sel" data-group="player" data-val="shibukawa">渋川難波</button>
+          <button class="cond-btn sakura-sel" data-group="player" data-val="akutsu">阿久津翔太</button>
+        </div>
+      </div>
+
+      <!-- PVの有無 -->
+      <div class="condition-group">
+        <label class="group-label">📺 PV（パブリックビューイング）</label>
+        <div class="btn-group" id="grp-pv">
+          <button class="cond-btn" data-group="pv" data-val="none">なし</button>
+          <button class="cond-btn" data-group="pv" data-val="online">オンラインPV あり</button>
+          <button class="cond-btn" data-group="pv" data-val="fc">ファンクラブPV あり</button>
+        </div>
+      </div>
+
+      <!-- ABEMAリンク状況 -->
+      <div class="condition-group">
+        <label class="group-label">🔗 ABEMAリンクの状況</label>
+        <div class="btn-group" id="grp-link">
+          <button class="cond-btn" data-group="link" data-val="ready">機構から短縮URL届いている</button>
+          <button class="cond-btn" data-group="link" data-val="notyet">まだ届いていない（月曜前）</button>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateGuide()" disabled>
+      ▶ 作業手順を表示する
+    </button>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result">
+    <!-- 設定サマリー -->
+    <div class="result-header">
+      <div>
+        <h2>✅ 作業手順ガイド</h2>
+        <p id="resultSubtitle">選択した条件に応じた手順を表示しています</p>
+      </div>
+    </div>
+
+    <div class="settings-summary" id="settingsSummary"></div>
+
+    <!-- STEP 0: 事前準備 -->
+    <div class="phase-block">
+      <div class="phase-label prep">
+        <div class="phase-icon">📋</div>
+        <div class="phase-label-text">
+          <h3>0. 事前準備</h3>
+          <span>投稿作業に入る前に必ず完了させてください</span>
+        </div>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">①</div>
+          <div class="step-content">
+            <div class="step-title">先発選手情報の取得</div>
+            <div class="step-desc">Slackなどで<strong>森井さん</strong>から該当日の先発選手情報をいただく。<br>
+            連絡が取れない場合は他の社員に確認してください。</div>
+          </div>
+        </div>
+        <div class="step-item" id="step-link">
+          <div class="step-num">②</div>
+          <div class="step-content">
+            <div class="step-title">放送URLの確認</div>
+            <div id="link-content"></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">③</div>
+          <div class="step-content">
+            <div class="step-title">お弁当画像のDL</div>
+            <div class="step-desc">
+              月曜日昼頃にMリーグ機構から短縮URLと共に<strong>選手控室用のお弁当情報（1日2種）の画像</strong>が連携されます。<br>
+              ・該当日の2種をそれぞれキャプチャしてローカルに保存<br>
+              ・お弁当名を2種それぞれ手打ちしてメモしておく
+            </div>
+            <div class="alert alert-info">💡 原則、長井さんから「#m室_92_インターン_業務連絡」スレへ連携されます。対応できていない場合は他社員に確認してください。</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">④</div>
+          <div class="step-content">
+            <div class="step-title">先発告知画像のDL</div>
+            <div class="step-desc">先発選手4人の告知画像をローカルPCにDLしておく。<br>
+            ※2025-26シーズン版を使用してください。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: ファンクラブ -->
+    <div class="phase-block">
+      <div class="phase-label fc">
+        <div class="phase-icon">🌸</div>
+        <div class="phase-label-text">
+          <h3>1. ファンクラブサイト投稿</h3>
+          <span>sheeta（シータ）への投稿作業</span>
+        </div>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num sakura">①</div>
+          <div class="step-content">
+            <div class="step-title">サイトにアクセス・記事を開く</div>
+            <div class="step-desc">
+              下記URLにアクセスし、「配信記事」→「M.LEAGUE」から<strong>投稿日の先発記事の雛形</strong>を選ぶ→「編集」をクリック
+            </div>
+            <div class="url-display">🔗 https://cp.sheeta.com/316</div>
+            <div class="alert alert-info">📝 3月いっぱいまでの雛形は作成済みです（下の方にスクロールして探してください）。「編集」はカセットを直接クリックか、右上の「…」→「編集」で開きます。</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">②</div>
+          <div class="step-content">
+            <div class="step-title">選手画像・選手名を挿入</div>
+            <div class="step-desc">
+              「アップロード」→「画像を参照」→各自の保存場所を指定→<strong>幅600に設定</strong>（高さは自動）→「保存」
+            </div>
+            <div class="step-desc" style="margin-top:8px;">選手名はフルネームで以下の形式で記載：</div>
+            <div id="player-tags" style="margin-top:6px;"></div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">③</div>
+          <div class="step-content">
+            <div class="step-title">コメント本文の作成</div>
+            <div id="comment-guide"></div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">④</div>
+          <div class="step-content">
+            <div class="step-title">ABEMAリンクの記載</div>
+            <div id="abema-guide"></div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">⑤</div>
+          <div class="step-content">
+            <div class="step-title">スタジオ弁当情報の記載</div>
+            <div id="bento-guide"></div>
+          </div>
+        </div>
+
+        <div id="pv-fc-step" class="step-item" style="display:none;">
+          <div class="step-num gold">PV</div>
+          <div class="step-content">
+            <div class="step-title" id="pv-fc-title"></div>
+            <div id="pv-fc-content"></div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">⑥</div>
+          <div class="step-content">
+            <div class="step-title">【重要】社員への確認を取る</div>
+            <div class="step-desc">コメント内容が固まったら、<strong>「#m室_20_sns予約投稿共有」で @here をつけて社員に確認</strong>を依頼してください。<br>
+            確認・修正が完了してから次のサイト公開・X・Slack反映を行います。</div>
+            <div class="alert alert-danger">⚠️ 確認前に公開・投稿しないよう注意！</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num sakura">⑦</div>
+          <div class="step-content">
+            <div class="step-title">予約公開設定</div>
+            <div class="step-desc">
+              社員確認完了後、以下の設定で予約公開してください：
+            </div>
+            <div class="checklist" id="fc-checklist">
+              <label class="check-item"><input type="checkbox"> 配信対象：<strong>会員限定</strong></label>
+              <label class="check-item"><input type="checkbox"> 公開設定：<strong>スケジュールを指定して公開</strong>　公開開始時間：<strong>試合日の 13:00〜</strong></label>
+              <label class="check-item"><input type="checkbox"> メール配信：<strong>記事公開と同時に配信</strong></label>
+              <label class="check-item"><input type="checkbox"> コメントの受付：<strong>受け付ける</strong></label>
+              <label class="check-item"><input type="checkbox"> コメント承認：<strong>自動承認</strong></label>
+              <label class="check-item"><input type="checkbox"> 画面右上の「確認」クリック → 「保存」クリック で設定完了</label>
+              <label class="check-item"><input type="checkbox"> 「ページを確認」クリック → 遷移先のURLをコピーしておく（X投稿で使用）</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: X -->
+    <div class="phase-block">
+      <div class="phase-label x">
+        <div class="phase-icon">𝕏</div>
+        <div class="phase-label-text">
+          <h3>2. X（旧Twitter）に投稿</h3>
+          <span>公式アカウントへの予約投稿</span>
+        </div>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num blue-twitter">①</div>
+          <div class="step-content">
+            <div class="step-title">過去投稿を参考に下書き作成</div>
+            <div class="step-desc">
+              X → 「ポストする」 → 過去の投稿を参考にコピーして貼り付け
+            </div>
+            <div class="alert alert-warn">⚠️ 過去投稿のコピペ注意：文字化け・文章欠損・URL欠損が起きやすい。<br>
+            必ず部分コピペ+2画面で見比べながら調整すること。</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num blue-twitter">②</div>
+          <div class="step-content">
+            <div class="step-title">内容を整える</div>
+            <div id="x-guide"></div>
+          </div>
+        </div>
+
+        <div id="pv-x-step" class="step-item" style="display:none;">
+          <div class="step-num gold">PV</div>
+          <div class="step-content">
+            <div class="step-title" id="pv-x-title"></div>
+            <div id="pv-x-content"></div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num blue-twitter">③</div>
+          <div class="step-content">
+            <div class="step-title">選手画像を添付</div>
+            <div class="step-desc">テキストが正しく入力できたら、画面下部一番左の画像アイコンをクリックして先発選手の画像を添付。</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num blue-twitter">④</div>
+          <div class="step-content">
+            <div class="step-title">予約投稿を設定</div>
+            <div class="step-desc">
+              投稿下の<strong>カレンダーマーク</strong>から日付と時刻を設定 → 「確認する」 → 「予約投稿」
+            </div>
+            <div class="alert alert-warn">⚠️ 予約時間：試合日の <strong>14:00〜</strong>に設定<br>
+            ⚠️ 下書きに保存後に再度作業すると予約投稿が消えるので注意！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Slack応援ch -->
+    <div class="phase-block">
+      <div class="phase-label slack-app">
+        <div class="phase-icon">💬</div>
+        <div class="phase-label-text">
+          <h3>3. Slack 応援チャンネルに投稿</h3>
+          <span>#mリーグ_サクラナイツ応援と雑談ch</span>
+        </div>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num purple">①</div>
+          <div class="step-content">
+            <div class="step-title">本文と画像の貼り付け</div>
+            <div class="step-desc">
+              ファンクラブ投稿の文章（ABEMAリンク以上の部分）を貼り付け + 選手画像を添付
+            </div>
+            <div id="slack-pv-guide"></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num purple">②</div>
+          <div class="step-content">
+            <div class="step-title">予告送信の設定</div>
+            <div class="step-desc">
+              送信ボタン横の <strong>↓</strong> より「カスタム時間」を押し、送信時間を<strong>試合日の 13:00〜</strong>に設定
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: 報告投稿 -->
+    <div class="phase-block">
+      <div class="phase-label report">
+        <div class="phase-icon">📢</div>
+        <div class="phase-label-text">
+          <h3>4. #m室_20_sns予約投稿共有 に報告</h3>
+          <span>完了報告をSlackで送信</span>
+        </div>
+      </div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num green">①</div>
+          <div class="step-content">
+            <div class="step-title">完了報告を投稿（@here をつけて）</div>
+            <div class="step-desc">以下の内容をすべて記載して投稿してください：</div>
+            <div class="checklist">
+              <label class="check-item"><input type="checkbox"> いつの先発告知か</label>
+              <label class="check-item"><input type="checkbox"> サイト記事の公開日時</label>
+              <label class="check-item"><input type="checkbox"> サイト記事の本番URL</label>
+              <label class="check-item"><input type="checkbox"> Xの投稿日時</label>
+              <label class="check-item"><input type="checkbox"> Xの投稿内容のキャプチャ画像</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 選手別コメント参考 -->
+    <div class="wizard-section" id="player-ref-section">
+      <div class="wizard-title">🀄 選手別コメント参考・注意事項</div>
+      <div id="player-ref-content"></div>
+    </div>
+
+    <button class="reset-btn" onclick="resetForm()">← 条件を選び直す</button>
+  </div>
+
+</main>
+
+<script>
+const conditions = { day: null, player: null, pv: null, link: null };
+
+document.querySelectorAll('.cond-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const group = this.dataset.group;
+    const val = this.dataset.val;
+
+    // For player: toggle multi-select
+    if (group === 'player') {
+      this.classList.toggle('selected');
+      // collect selected players
+      conditions.player = [...document.querySelectorAll('.cond-btn[data-group="player"].selected')]
+        .map(b => b.dataset.val);
+      if (conditions.player.length === 0) conditions.player = null;
+    } else {
+      document.querySelectorAll(`.cond-btn[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      conditions[group] = val;
+    }
+
+    checkReady();
+  });
+});
+
+function checkReady() {
+  const ready = conditions.day && conditions.player && conditions.pv && conditions.link;
+  document.getElementById('generateBtn').disabled = !ready;
+}
+
+function generateGuide() {
+  const { day, player, pv, link } = conditions;
+  const isThuFri = (day === 'thu' || day === 'fri');
+  const isMon = (day === 'mon');
+
+  // Settings summary
+  const dayLabel = { mon:'月曜', tue:'火曜', wed:'水曜', thu:'木曜', fri:'金曜', other:'その他' }[day];
+  const pvLabel = { none:'PVなし', online:'オンラインPVあり', fc:'ファンクラブPVあり' }[pv];
+  const linkLabel = link === 'ready' ? '短縮URL届いている' : '短縮URLなし（ABEMA直接取得）';
+
+  const playerNames = { okada:'岡田紗佳', hori:'堀慎吾', shibukawa:'渋川難波', akutsu:'阿久津翔太' };
+  const selectedNames = player.map(p => playerNames[p]).join('・');
+
+  document.getElementById('settingsSummary').innerHTML = `
+    <span style="font-size:0.75rem;color:var(--gray-600);margin-right:4px;">選択条件：</span>
+    <span class="settings-tag">${dayLabel}</span>
+    <span class="settings-tag pink">先発：${selectedNames}</span>
+    <span class="settings-tag">${pvLabel}</span>
+    <span class="settings-tag" style="background:var(--gray-600)">${linkLabel}</span>
+  `;
+
+  // Step ②: ABEMAリンク
+  let linkHTML = '';
+  if (isMon) {
+    linkHTML = `
+      <div class="step-desc">月曜日の試合日用URLは<strong>機構から当日にしか送られてこない</strong>ため、前週に仕込む場合はABEMAサイトからリンクを直接取得してください。</div>
+      <div class="alert alert-warn">⚠️ 月曜試合は前週仕込みの場合は注意！機構URLが届いていなければABEMA直接取得。</div>`;
+  } else if (link === 'ready') {
+    linkHTML = `<div class="step-desc">「#m室_92_インターン_業務連絡」スレに貼ってある<strong>Mリーグ機構からの短縮URL</strong>を確認してコピーしておく。</div>`;
+  } else {
+    linkHTML = `
+      <div class="step-desc">機構からの短縮URLがまだ届いていないため、<strong>ABEMAサイトから直接URLをコピー</strong>してください。</div>
+      <div class="alert alert-warn">⚠️ 機構URLは毎週月曜日昼頃に届きます。届き次第差し替えることを忘れずに。</div>`;
+  }
+  if (isThuFri) {
+    linkHTML += `<div class="alert alert-danger">🔴 木・金は2卓同時開催あり！「麻雀CH」または「麻雀2CH」どちらにサクラナイツが出るか必ずリンクにアクセスして対戦表を確認すること。</div>`;
+  }
+  document.getElementById('link-content').innerHTML = linkHTML;
+
+  // Player tags
+  const playerTagHTML = player.map(p => `<span class="player-tag">【${playerNames[p]}】選手</span>`).join('');
+  document.getElementById('player-tags').innerHTML = playerTagHTML;
+
+  // Comment guide
+  let commentHTML = `
+    <div class="step-desc">2行・40〜60文字程度で記載。勢いと柔らかさを意識して、文末に絵文字を加えてください。</div>
+    <div class="step-desc" style="margin-top:6px;">よく使う絵文字：</div>
+    <div class="emoji-row"><span class="emoji-pill">✨</span><span class="emoji-pill">🌸</span><span class="emoji-pill">⚡</span><span class="emoji-pill">🌀</span><span class="emoji-pill">💪</span><span class="emoji-pill">🔥</span></div>
+  `;
+  if (isThuFri) {
+    commentHTML += `<div class="alert alert-info" style="margin-top:8px;">📺 2卓同時開催のため、サクラナイツ放送卓の案内を入れてください。</div>`;
+  }
+  commentHTML += `
+    <div class="alert alert-danger" style="margin-top:8px;">🚫 NGトピック：Mリーグ以外の話題（阿久津選手の鳳凰位・岡田選手の芸能活動・堀選手の競馬・渋川選手のゲーム配信）には触れないこと</div>
+  `;
+  document.getElementById('comment-guide').innerHTML = commentHTML;
+
+  // ABEMA guide
+  let abemaHTML = '';
+  if (isThuFri) {
+    abemaHTML = `
+      <div class="step-desc">2卓同時開催のため、チャンネルを間違えないよう注意。必ずリンクにアクセスして確認してください。</div>
+      <div class="alert alert-danger">🔴 「麻雀CH」か「麻雀2CH」どちらかを正しく記載する。間違えると大変です！</div>`;
+  } else {
+    abemaHTML = `<div class="step-desc">機構から届いた短縮URL（またはABEMAの直接URL）を記載してください。</div>`;
+  }
+  document.getElementById('abema-guide').innerHTML = abemaHTML;
+
+  // Bento guide
+  let bentoHTML = `
+    <div class="step-desc">
+      ・お弁当名2種を「1.〜〜〜」「2.〜〜〜」の形式で手打ち<br>
+      ・各お弁当名の下にキャプチャした画像を挿入（横300px程度で設定すると綺麗）<br>
+      ・画像の下にお弁当についての一言コメントを入れる
+    </div>
+  `;
+  if (pv !== 'none') {
+    bentoHTML += `<div class="alert alert-info">🎉 PVがある日はBOOK☆WALKERさまより豪華弁当が差し入れられる予定です。お弁当の文章もPV仕様に変更してください（詳細は下のPVセクション参照）。</div>`;
+  }
+  document.getElementById('bento-guide').innerHTML = bentoHTML;
+
+  // PV fc step
+  const pvFcStep = document.getElementById('pv-fc-step');
+  const pvFcTitle = document.getElementById('pv-fc-title');
+  const pvFcContent = document.getElementById('pv-fc-content');
+  const pvXStep = document.getElementById('pv-x-step');
+  const pvXTitle = document.getElementById('pv-x-title');
+  const pvXContent = document.getElementById('pv-x-content');
+  const slackPvGuide = document.getElementById('slack-pv-guide');
+
+  if (pv === 'online') {
+    pvFcStep.style.display = 'flex';
+    pvFcTitle.textContent = 'オンラインPV情報を追記';
+    pvFcContent.innerHTML = `
+      <div class="step-desc">通常の先発告知に加えて以下を追記してください：</div>
+      <div class="example-box">■18:55〜　オンラインPV配信！
+本日は18:55よりオンラインＰＶも配信します✨
+【配信サムネ画像添付】
+（配信タイトル＋URL）
+（一言）
+
+■18:30〜　ファンクラブ／サポーター限定配信
+さらに！　18:30からサクラナイツファンクラブおよびオフィシャルサポーター限定配信を控室から生配信✨
+【配信サムネ画像添付】
+ファンクラブ会員およびサポーターの方はぜひご視聴ください🌸
+
+●オフィシャルサポーター（サクラナイツ）会員のご視聴はこちら
+（サポーターページの該当記事のURL）
+※オフィシャルサポーターにログイン後、上記URLにアクセスをお願いします
+
+●サクラナイツファンクラブ会員のご視聴はこちら
+（YouTubeの限定配信のURL）
+【注意】この配信のURLを外部に公開することは固く禁じさせていただきます。
+
+■スタジオ弁当情報
+本日のサクラナイツはオンラインPVの開催日ということで
+BOOK☆WALKERさまより豪華弁当が差し入れられる予定です👏
+果たしてどんなお弁当がスタジオに届けられるのか、ぜひ配信でご確認ください🍱</div>
+      <div class="alert alert-danger" style="margin-top:8px;">🔒 ファンクラブ・サポーター限定配信のURLは<strong>公式サイト会員限定記事・社内Slack以外での公開はNG</strong>！万が一公開した場合は投稿削除後すぐに社員に相談。</div>
+    `;
+
+    pvXStep.style.display = 'flex';
+    pvXTitle.textContent = 'PV関連予約投稿を追加';
+    pvXContent.innerHTML = `
+      <div class="step-desc">先発投稿に続けて：</div>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"> オンラインPVの情報を含む投稿を予約</label>
+        <label class="check-item"><input type="checkbox"> ファンクラブ・サポーター配信の情報投稿も別途予約</label>
+      </div>
+    `;
+
+    slackPvGuide.innerHTML = `<div class="alert alert-info" style="margin-top:8px;">💬 Slackの応援チャンネルへの投稿もファンクラブと同じ内容で（弁当情報は省略OK）</div>`;
+
+  } else if (pv === 'fc') {
+    pvFcStep.style.display = 'flex';
+    pvFcTitle.textContent = 'ファンクラブ限定配信情報を追記';
+    pvFcContent.innerHTML = `
+      <div class="step-desc">サムネイル画像と配信URLを掲載するためのテンプレートが用意されているのでそれを使用してください。<br>
+      ・サムネイル画像と配信URLは<strong>長井さんにご確認ください</strong></div>
+      <div class="alert alert-info">ℹ️ ファンクラブPVの日は「ファンクラブ・サポーター限定配信（18:30〜）」はありません。</div>
+    `;
+
+    pvXStep.style.display = 'flex';
+    pvXTitle.textContent = 'ファンクラブ限定配信情報を先発投稿に追加';
+    pvXContent.innerHTML = `
+      <div class="step-desc">先発投稿時に以下を記載してください：</div>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"> 18:50〜 ファンクラブ限定PVが行われること</label>
+        <label class="check-item"><input type="checkbox"> 配信URL（http://sakuranights〜 で始まるもの → 一般公開OK）</label>
+        <label class="check-item"><input type="checkbox"> 第1試合が始まるまでは誰でも見られること</label>
+      </div>
+      <div class="alert alert-info">ℹ️ 140文字を超えても大丈夫です。</div>
+      <div class="alert alert-success">✅ ファンクラブPVのURLは一般公開OK（非会員がアクセスしても一部しか見られないため）</div>
+    `;
+
+    slackPvGuide.innerHTML = `<div class="alert alert-info" style="margin-top:8px;">💬 Slackには「ファンクラブ限定配信は一回戦開始までは誰でも見られること」を追記してください。</div>`;
+  } else {
+    pvFcStep.style.display = 'none';
+    pvXStep.style.display = 'none';
+    slackPvGuide.innerHTML = '';
+  }
+
+  // X guide
+  let xGuideHTML = `
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox"> ハッシュタグ：「＃Mリーグ」「＃選手名」を入れる（2個目は不要）</label>`;
+  if (isThuFri) {
+    xGuideHTML += `<label class="check-item"><input type="checkbox"> 2卓同時開催のサクラナイツ放送卓案内を追加（麻雀CH または 麻雀2CH）</label>`;
+  }
+  xGuideHTML += `
+      <label class="check-item"><input type="checkbox"> 過去投稿と同じ内容か2画面で最終確認</label>
+    </div>
+  `;
+  document.getElementById('x-guide').innerHTML = xGuideHTML;
+
+  // Player reference
+  buildPlayerRef(player);
+
+  document.getElementById('result').classList.add('visible');
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Enable checklist click animation
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      this.closest('.check-item').classList.toggle('checked', this.checked);
+    });
+  });
+}
+
+function buildPlayerRef(players) {
+  const data = {
+    okada: {
+      name: '岡田紗佳 選手',
+      nickname: '完全武装アフロディーテ',
+      caution: `・「TOPを持って帰ってきていただきましょう」「今度こそ1位を〜」などの過度な期待やプレッシャー表現は絶対NG\n・打ち筋・戦術の指定（「今日はデイリーダブルで〜」など）はNG\n・これからの成績（不確定）に触れるのはNG。直近の成績（確定事項）で良ければOK`,
+      examples: `完全武装アフロディーテ出陣です✨\n繊細かつ大胆な打牌を今夜も魅せていただきましょう🀄\n\n前回登板では見事な打ち回しを魅せてくれました✨\n今節も気分よく存分に戦ってきていただきたいです😁`,
+    },
+    hori: {
+      name: '堀慎吾 選手',
+      nickname: '小さな天才',
+      caution: `・自団体の主要タイトルホルダー・A1リーガーなので、期待する内容はOK\n・堀選手の競馬の話はMリーグと混同できないので避けること`,
+      examples: `お待たせしました。\n皆さまお待ちかねの「小さな天才」先発です🎶\n\n年始登板以来の出場です✨\n充電は満タンです🔋溜めた力を卓上で爆発させていただきましょう💣`,
+    },
+    shibukawa: {
+      name: '渋川難波 選手',
+      nickname: '魔神',
+      caution: `・引用リポストしてくれることが多いので、引用しやすい内容が好ましい\n・渋川選手の配信・雀魂活動については触れないこと`,
+      examples: `これまで好成績が続いている❝魔神❞こと渋川選手✨\n前回同様にぶっちぎりのTOP目指して頑張ってもらいましょう👏\n\nサクラナイツがピンチな時ほど頼りになるのはこの人⚡\nTOPを期待しています✨`,
+    },
+    akutsu: {
+      name: '阿久津翔太 選手',
+      nickname: '我慢が嫌いな喰いしん坊',
+      caution: `・引用リポストしてくれることが多いので、引用しやすい内容が好ましい\n・阿久津選手の鳳凰位挑戦などMリーグ以外の話題は避けること`,
+      examples: `サクラナイツの今シーズン初戦の先発は、新加入選手"我慢が嫌いな喰いしん坊"【#阿久津翔太】選手が出陣します🌸\n卓上のすべてを喰らい尽くす活躍にご期待ください🍚\n\n前回うれしい2勝目をあげて今ノリに乗っています✨\nもう怖いものは何もありません⚡全部喰いつくしてもらいましょう💪`,
+    }
+  };
+
+  const expressionGuide = `
+    <div class="step-item" style="margin-top:16px;">
+      <div class="step-num" style="background:var(--gray-600)">📝</div>
+      <div class="step-content">
+        <div class="step-title">成績の表現方法（ポジティブに）</div>
+        <div class="step-desc">
+          2着 → 「連対」「貴重な加点」<br>
+          3・4着 → 「耐え」「苦しい展開」<br>
+          放銃 → 「つかんでしまった」「不運な失点」<br><br>
+          ※ 直近4連続ラスなど悪い結果を触れざるを得ない場合は「運が悪くて」「避けようのないアクシデント」のニュアンスで
+        </div>
+        <div class="alert alert-info" style="margin-top:8px;">📊 参考ソース：<a href="https://www.m-katsu.com/team/4.html" target="_blank" style="color:var(--kadokawa-blue-light)">Mカツ</a> ／ <a href="https://x.com/mleague_results" target="_blank" style="color:var(--kadokawa-blue-light)">Mリーグ成績速報（非公式）</a></div>
+      </div>
+    </div>
+  `;
+
+  const html = players.map(p => {
+    const d = data[p];
+    return `
+      <div class="nickname-card" style="margin-bottom:14px;">
+        <div class="nn-name">🀄 ${d.name}｜二つ名「${d.nickname}」</div>
+        <div class="nn-nick" style="margin-top:6px;font-weight:700;color:var(--gray-800);font-size:0.78rem;">⚠️ 注意事項</div>
+        <div class="nn-nick" style="white-space:pre-wrap;">${d.caution}</div>
+        <div class="nn-nick" style="margin-top:8px;font-weight:700;color:var(--gray-800);font-size:0.78rem;">💬 コメント例</div>
+        <div class="nn-example">${d.examples}</div>
+      </div>
+    `;
+  }).join('') + expressionGuide;
+
+  document.getElementById('player-ref-content').innerHTML = html;
+}
+
+function resetForm() {
+  Object.keys(conditions).forEach(k => conditions[k] = null);
+  document.querySelectorAll('.cond-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('generateBtn').disabled = true;
+  document.getElementById('result').classList.remove('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
